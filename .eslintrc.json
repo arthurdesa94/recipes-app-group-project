@@ -54,7 +54,7 @@
     ],
     "max-params": ["error", 4],
     "max-lines": ["error", 250],
-    "max-lines-per-function": ["error", 20],
+    "max-lines-per-function": ["error", 200],
     "complexity": ["error", 15],
     "object-curly-newline": ["off"],
     "import/no-extraneous-dependencies": ["off"],
