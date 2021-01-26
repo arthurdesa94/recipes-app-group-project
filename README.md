@@ -356,7 +356,7 @@ Projeto em grupo.
 
 Serão dez dias de projeto.
 
-Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
+Data de entrega para avaliação final do projeto: `16/02/2021 - 14:00h`.
 
 ---
 
