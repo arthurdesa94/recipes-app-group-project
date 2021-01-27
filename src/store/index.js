@@ -7,7 +7,8 @@ import rootReducer from '../reducers/index';
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk)),
+  // composeEnhancers(applyMiddleware(thunk)),
+  applyMiddleware(thunk),
 );
 
 export default store;
