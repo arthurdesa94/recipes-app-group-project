@@ -1,8 +1,12 @@
 import React from 'react';
 import MenuInferior from '../components/MenuInferior';
+import Header from '../components/Header'
 
-function Foods() {
-  return <MenuInferior />;
+export default function Foods() {
+  return (
+    <div>
+      <Header title="Comidas" />
+      <MenuInferior />
+    </div>
+  );
 }
-
-export default Foods;
