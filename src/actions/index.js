@@ -32,9 +32,8 @@ const storageDrinkRecipes = (value) => ({
 
 export const retrieveNameRecipes = (value) => (dispatch) => {
   dispatch({ type: LOADING });
-  API.searchFoodNameRequest(value).then((result) =>
-    dispatch(storageRecipes(result)),
-  );
+  API.searchFoodNameRequest(value)
+    .then((result) => dispatch(storageRecipes(result)));
   dispatch({ type: OK });
 };
 
