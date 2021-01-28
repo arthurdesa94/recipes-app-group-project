@@ -6,6 +6,7 @@ const OK = 'OK';
 const INITIAL_STATE = {
   loading: false,
   recipes: [{}],
+  recipesDrink: [{}],
 };
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
@@ -20,7 +21,7 @@ const recipes = (state = INITIAL_STATE, action) => {
     return { ...state, recipes: [...meals] };
   case RETRIEVE_DRINK_RECIPES:
     drink = Object.values(action.value);
-    return { ...state, recipes: [...drink] };
+    return { ...state, recipesDrink: [...drink] };
   default:
     return state;
   }

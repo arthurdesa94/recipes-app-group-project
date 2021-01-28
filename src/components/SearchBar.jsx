@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import * as Actions from '../actions';
 
-function SearchBar(props) {
+function SearchBar({ pathname }) {
   const [searchValue, setSearchValue] = useState('');
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
@@ -11,18 +12,18 @@ function SearchBar(props) {
   const searchTypeFunc = () => {
     switch (input) {
     case 'name':
-      return props.location.pathname === '/comidas'
+      return pathname === '/comidas'
         ? dispatch(Actions.retrieveNameRecipes(searchValue))
         : dispatch(Actions.retrieveDrinkNameRecipes(searchValue));
     case 'firstLetter':
       if (searchValue.length > 1) {
         alert('Sua busca deve conter somente 1 (um) caracter');
-      } else if (props.location.pathname === '/comidas') {
+      } else if (pathname === '/comidas') {
         dispatch(Actions.retrievefirstLetterRecipes(searchValue));
       } else dispatch(Actions.retrieveDrinkFirstLetterRecipes(searchValue));
       break;
     default:
-      return props.location.pathname === '/comidas'
+      return pathname === '/comidas'
         ? dispatch(Actions.retrieveIngredientRecipes(searchValue))
         : dispatch(Actions.retrieveDrinkIngredientRecipes(searchValue));
     }
@@ -77,5 +78,9 @@ function SearchBar(props) {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  pathname: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
