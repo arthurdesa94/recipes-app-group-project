@@ -1,4 +1,4 @@
-export const searchFoodNameRequest = (word) => fetch(`https://www.themealdb.com/api/json/v1/1/searchFood.php?s=${word}`)
+export const searchFoodNameRequest = (word) => fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`)
   .then((response) => response.json())
   .then((result) => result);
 
@@ -10,7 +10,7 @@ export const searchFoodByIdRequest = (id) => fetch(`https://www.themealdb.com/ap
   .then((response) => response.json())
   .then((result) => result);
 
-export const searchFoodFirstWordDrinkRequest = (word) => fetch(`https://www.themealdb.com/api/json/v1/1/searchFood.php?f=${word}`)
+export const searchFoodFirstWordDrinkRequest = (word) => fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${word}`)
   .then((response) => response.json())
   .then((result) => result);
 
