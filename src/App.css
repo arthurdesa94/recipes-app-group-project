@@ -1,3 +1,4 @@
-.meals {
-  align-items: center;
+.footer {
+  bottom: 0;
+  position: fixed;
 }
