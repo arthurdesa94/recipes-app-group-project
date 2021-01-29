@@ -18,6 +18,7 @@ function SearchBar({ location }) {
         : dispatch(Actions.retrieveDrinkNameRecipes(searchValue));
     case 'firstLetter':
       if (searchValue.length > 1) {
+        // eslint-disable-next-line no-alert
         alert('Sua busca deve conter somente 1 (um) caracter');
       } else if (location === '/comidas') {
         dispatch(Actions.retrievefirstLetterRecipes(searchValue));
@@ -73,7 +74,11 @@ function SearchBar({ location }) {
           />
           Primeira letra
         </label>
-        <button data-testid="exec-search-btn" type="button" onClick={ searchTypeFunc }>
+        <button
+          data-testid="exec-search-btn"
+          type="button"
+          onClick={ searchTypeFunc }
+        >
           Buscar
         </button>
       </div>
