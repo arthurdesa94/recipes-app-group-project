@@ -6,7 +6,7 @@ function Explore() {
   return (
     <div>
       Explore
-      <Header title="Explorar" />
+      <Header title="Explorar" search={ false } />
       <MenuInferior />
     </div>
   );

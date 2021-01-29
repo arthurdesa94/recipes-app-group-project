@@ -6,7 +6,7 @@ function ExploreDrinksIngredients() {
   return (
     <div>
       ExploreDrinksIngredients
-      <Header title="ExploreDrinksIngredients" />
+      <Header title="ExploreDrinksIngredients" search={ false } />
       <MenuInferior />
     </div>
   );

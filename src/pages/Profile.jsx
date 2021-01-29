@@ -6,7 +6,7 @@ function Profile() {
   return (
     <div>
       Profile
-      <Header title="Profile" />
+      <Header title="Profile" search={ false } />
       <MenuInferior />
     </div>
   );
