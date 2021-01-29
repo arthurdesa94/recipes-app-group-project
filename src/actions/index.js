@@ -30,44 +30,45 @@ const storageDrinkRecipes = (value) => ({
   value,
 });
 
-export const retrieveNameRecipes = (value) => (dispatch) => {
+export const retrieveNameRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  API.searchFoodNameRequest(value)
+  await API.searchFoodNameRequest(value)
     .then((result) => dispatch(storageRecipes(result)));
   dispatch({ type: OK });
 };
 
-export const retrievefirstLetterRecipes = (value) => (dispatch) => {
+export const retrievefirstLetterRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  API.searchFoodFirstWordDrinkRequest(value)
+  await API.searchFoodFirstWordDrinkRequest(value)
     .then((result) => dispatch(storageRecipes(result)));
   dispatch({ type: OK });
 };
 
-export const retrieveIngredientRecipes = (value) => (dispatch) => {
+export const retrieveIngredientRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  API.searchFoodByMainIngredientsRequest(value)
+  await API.searchFoodByMainIngredientsRequest(value)
     .then((result) => dispatch(storageRecipes(result)));
   dispatch({ type: OK });
 };
 
-export const retrieveDrinkNameRecipes = (value) => (dispatch) => {
+export const retrieveDrinkNameRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  DRINKAPI.searchDrinkNameRequest(value)
+  await DRINKAPI.searchDrinkNameRequest(value)
     .then((result) => dispatch(storageDrinkRecipes(result)));
   dispatch({ type: OK });
 };
 
-export const retrieveDrinkFirstLetterRecipes = (value) => (dispatch) => {
+export const retrieveDrinkFirstLetterRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  DRINKAPI.searchDrinkFirstLetterRequest(value)
+  await DRINKAPI.searchDrinkFirstLetterRequest(value)
     .then((result) => dispatch(storageDrinkRecipes(result)));
   dispatch({ type: OK });
 };
 
-export const retrieveDrinkIngredientRecipes = (value) => (dispatch) => {
+export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  DRINKAPI.searchDrinkByMainIngredientsRequest(value)
-    .then((result) => dispatch(storageDrinkRecipes(result)));
+  await DRINKAPI.searchDrinkByMainIngredientsRequest(value)
+    .then((result) => dispatch(storageDrinkRecipes(result)))
+    .catch(() => dispatch(storageDrinkRecipes({ drinks: null })));
   dispatch({ type: OK });
 };

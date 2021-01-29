@@ -5,8 +5,8 @@ const OK = 'OK';
 
 const INITIAL_STATE = {
   loading: false,
-  recipes: [{}],
-  recipesDrink: [{}],
+  recipes: [],
+  recipesDrink: [],
 };
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
@@ -17,10 +17,14 @@ const recipes = (state = INITIAL_STATE, action) => {
   case OK:
     return { ...state, loading: false };
   case RETRIEVE_RECIPES:
-    meals = Object.values(action.value);
+    meals = action.value.meals === null
+      ? [{ error: null }]
+      : Object.values(action.value.meals);
     return { ...state, recipes: [...meals] };
   case RETRIEVE_DRINK_RECIPES:
-    drink = Object.values(action.value);
+    drink = action.value.drinks === null
+      ? [{ error: null }]
+      : Object.values(action.value.drinks);
     return { ...state, recipesDrink: [...drink] };
   default:
     return state;

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MenuInferior from '../components/MenuInferior';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
+import RecipeFoodCard from '../components/RecipeFoodCard';
 
 function Foods({ location }) {
   const { setter } = useSelector((state) => state.user);
@@ -12,6 +13,7 @@ function Foods({ location }) {
     <div>
       <Header title="Comidas" />
       {searchBarView && <SearchBar location={ location.pathname } />}
+      <RecipeFoodCard />
       <MenuInferior />
     </div>
   );

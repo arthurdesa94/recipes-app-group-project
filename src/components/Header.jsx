@@ -7,7 +7,7 @@ import searchIcon from '../images/searchIcon.svg';
 import * as Actions from '../actions/index';
 import '../App.css';
 
-function Header({ title }) {
+function Header({ title, search = true }) {
   const zero = 0;
   const two = 2;
   const [valueFlag, setValueFlag] = useState(two);
@@ -33,15 +33,18 @@ function Header({ title }) {
         />
       </Link>
       <div data-testid="page-title">{title}</div>
-      <button type="button" onClick={ () => handleClick(valueFlag) }>
-        <img src={ searchIcon } alt="Search img" data-testid="search-top-btn" />
-      </button>
+      {search && (
+        <button type="button" onClick={ () => handleClick(valueFlag) }>
+          <img src={ searchIcon } alt="Search img" data-testid="search-top-btn" />
+        </button>
+      )}
     </header>
   );
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  search: PropTypes.bool.isRequired,
 };
 
 export default Header;
