@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 function RecipeFoodCard() {
   const { recipes, loading } = useSelector((state) => state.recipes);
-  console.log(recipes);
   const size = recipes.length;
   const maxListSize = 11;
   const returnRecipes = () => {
