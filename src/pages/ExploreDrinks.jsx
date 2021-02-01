@@ -5,8 +5,7 @@ import Header from '../components/Header';
 function ExploreDrinks() {
   return (
     <div>
-      ExploreDrinks
-      <Header title="Explorar bebidas" search={ false } />
+      <Header title="Explorar Bebidas" search={ false } />
       <MenuInferior />
     </div>
   );

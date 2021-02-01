@@ -11,7 +11,6 @@ function Drinks({ location }) {
   const searchBarView = setter;
   return (
     <div>
-      Drinks
       <Header title="Bebidas" />
       {searchBarView && <SearchBar location={ location.pathname } />}
       <RecipeDrinkCard />
