@@ -6,6 +6,7 @@ function RecipeDrinkCard() {
   const { recipesDrink, loading } = useSelector((state) => state.recipes);
   const size = recipesDrink.length;
   const maxListSize = 11;
+
   const returnRecipes = () => {
     if (size === 1) {
       if (recipesDrink[0].error === null) {
