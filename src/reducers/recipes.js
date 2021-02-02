@@ -1,12 +1,15 @@
 const LOADING = 'LOADING';
 const RETRIEVE_RECIPES = 'RETRIEVE_RECIPES';
 const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
+const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
+const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
 const OK = 'OK';
 
 const INITIAL_STATE = {
   loading: false,
   recipes: [],
   recipesDrink: [],
+  details: [],
 };
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
@@ -26,6 +29,12 @@ const recipes = (state = INITIAL_STATE, action) => {
       ? [{ error: null }]
       : Object.values(action.value.drinks);
     return { ...state, recipesDrink: [...drink] };
+  case RETRIEVE_FOOD_DETAILS:
+    action.value.meals[0].strYoutube = action.value.meals[0]
+      .strYoutube.replace(/.com\/watch\?v=/, '.com/embed/');
+    console.log(action.value.meals[0].strYoutube);
+    console.log(action.value.meals[0].strYoutube);
+    return { ...state, details: action.value.meals };
   default:
     return state;
   }

@@ -7,6 +7,8 @@ const OK = 'OK';
 const RETRIEVE_RECIPES = 'RETRIEVE_RECIPES';
 const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
 const SET_SEARCH = 'SET_SEARCH';
+const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
+const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
 
 export const signIn = (email) => ({
   type: SIGN_IN,
@@ -25,9 +27,19 @@ const storageRecipes = (value) => ({
   value,
 });
 
+const storageFoodDetails = (value) => ({
+  type: RETRIEVE_FOOD_DETAILS,
+  value,
+});
+
+const storageDrinkDetails = (value) => ({
+  type: RETRIEVE_DRINK_DETAILS,
+  value,
+});
+
 const storageDrinkRecipes = (value) => ({
   type: RETRIEVE_DRINK_RECIPES,
-  value,
+  value
 });
 
 export const retrieveNameRecipes = (value) => async (dispatch) => {
@@ -70,5 +82,20 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
   await DRINKAPI.searchDrinkByMainIngredientsRequest(value)
     .then((result) => dispatch(storageDrinkRecipes(result)))
     .catch(() => dispatch(storageDrinkRecipes({ drinks: null })));
+  dispatch({ type: OK });
+};
+export const retrieveDrinkDetailsById = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchDrinkByIdRequest(value)
+    .then((result) => dispatch(storageDrinkDetails(result)))
+    .catch(() => dispatch(storageDrinkDetails({ drinks: null })));
+  dispatch({ type: OK });
+};
+
+export const retrieveFoodDetailsById = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await API.searchFoodByIdRequest(value)
+    .then((result) => dispatch(storageFoodDetails(result)))
+    .catch(() => dispatch(storageFoodDetails({ drinks: null })));
   dispatch({ type: OK });
 };
