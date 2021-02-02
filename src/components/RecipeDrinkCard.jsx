@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function RecipeDrinkCard() {
@@ -19,14 +19,16 @@ function RecipeDrinkCard() {
       return recipesDrink.map(({ strDrink, idDrink, strDrinkThumb }, index) => {
         if (index <= maxListSize) {
           return (
-            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ strDrinkThumb }
-                alt="recipeimage"
-              />
-              <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-            </div>
+            <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
+              <div data-testid={ `${index}-recipe-card` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ strDrinkThumb }
+                  alt="recipeimage"
+                />
+                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+              </div>
+            </Link>
           );
         }
         return '';
