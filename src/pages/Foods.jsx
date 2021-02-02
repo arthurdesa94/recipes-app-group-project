@@ -13,15 +13,8 @@ function Foods({ location }) {
   const searchBarView = setter;
   const dispatch = useDispatch();
 
-  const randomWord = () => {
-    const letters = 'bcfklmprst';
-    const nine = 9;
-    const randomIndex = Math.round(Math.random() * nine);
-    dispatch(Actions.retrievefirstLetterRecipes(letters[randomIndex]));
-  };
-
   useEffect(() => {
-    randomWord();
+    dispatch(Actions.retrieveInitialRecipes());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

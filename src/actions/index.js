@@ -55,6 +55,13 @@ export const retrieveCategoryRecipes = (value) => async (dispatch) => {
   dispatch({ type: OK });
 };
 
+export const retrieveInitialRecipes = () => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await API.searchInitial()
+    .then((result) => dispatch(storageRecipes(result)));
+  dispatch({ type: OK });
+};
+
 // ------------------------------------------------- ACTIONS RELACIONADAS AO ARMAZENAMENTO DE BEBIDAS
 
 export const storageDrinkRecipes = (value) => ({
@@ -87,6 +94,13 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
 export const retrieveDrinkCategoryRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
   await DRINKAPI.searchDrinkByCategory(value)
+    .then((result) => dispatch(storageDrinkRecipes(result)));
+  dispatch({ type: OK });
+};
+
+export const retrieveDrinkInitialRecipes = () => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchInitialDrink()
     .then((result) => dispatch(storageDrinkRecipes(result)));
   dispatch({ type: OK });
 };

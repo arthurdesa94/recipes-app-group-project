@@ -45,3 +45,7 @@ export const searchFoodByArea = (area) => fetch(`https://www.themealdb.com/api/j
 export const returnIngredientPhotoUrl = (IngredientesName) => `https://www.themealdb.com/images/ingredients/${IngredientesName}.png`;
 
 export const returnSmallIngredientPhotoUrl = (IngredientesName) => `https://www.themealdb.com/images/ingredients/${IngredientesName}-Small.png`;
+
+export const searchInitial = () => fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+  .then((response) => response.json())
+  .then((result) => result);

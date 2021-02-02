@@ -55,3 +55,7 @@ export const returnSmallIngredientPhotoUrl = (IngredientesName) => `https://www.
 export const returnMediumIngredientPhotoUrl = (IngredientesName) => `https://www.thecocktaildb.com/images/ingredients/${IngredientesName}-Medium.png`;
 
 export const returnLargeIngredientPhotoUrl = (IngredientesName) => `https://www.thecocktaildb.com/images/ingredients/${IngredientesName}.png`;
+
+export const searchInitialDrink = () => fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+  .then((response) => response.json())
+  .then((result) => result);

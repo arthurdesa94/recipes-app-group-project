@@ -13,15 +13,8 @@ function Drinks({ location }) {
   const searchBarView = setter;
   const dispatch = useDispatch();
 
-  const randomWord = () => {
-    const letters = 'abcdfghjklmoprstvz';
-    const seventeen = 17;
-    const randomIndex = Math.round(Math.random() * seventeen);
-    dispatch(Actions.retrieveDrinkFirstLetterRecipes(letters[randomIndex]));
-  };
-
   useEffect(() => {
-    randomWord();
+    dispatch(Actions.retrieveDrinkInitialRecipes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

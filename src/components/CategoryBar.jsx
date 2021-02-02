@@ -24,20 +24,6 @@ function CategoryBar({ type }) {
     }
   };
 
-  const randomWordFood = () => {
-    const letters = 'bcfklmprst';
-    const nine = 9;
-    const randomIndex = Math.round(Math.random() * nine);
-    dispatch(Actions.retrievefirstLetterRecipes(letters[randomIndex]));
-  };
-
-  const randomWordDrink = () => {
-    const letters = 'abcdfghjklmoprstvz';
-    const seventeen = 17;
-    const randomIndex = Math.round(Math.random() * seventeen);
-    dispatch(Actions.retrieveDrinkFirstLetterRecipes(letters[randomIndex]));
-  };
-
   useEffect(() => {
     fetchCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,9 +40,9 @@ function CategoryBar({ type }) {
       }
     } else if (flag % two === zero) {
       if (type === 'foods') {
-        randomWordFood();
+        dispatch(Actions.retrieveInitialRecipes());
       } else {
-        randomWordDrink();
+        dispatch(Actions.retrieveDrinkInitialRecipes());
       }
       setFlag(flag + 1);
     } else if (flag % two !== zero) {
@@ -74,6 +60,12 @@ function CategoryBar({ type }) {
   // prettier-ignore
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {response.map(
         (element, index) => index < five && (
           <button
