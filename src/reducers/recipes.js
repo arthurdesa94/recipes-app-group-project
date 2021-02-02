@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   recipesDrink: [],
   details: [],
 };
+
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
   let drink;

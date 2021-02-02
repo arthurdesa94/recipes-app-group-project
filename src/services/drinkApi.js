@@ -13,6 +13,7 @@ export const searchDrinkByIdRequest = (id) => fetch(`https://www.thecocktaildb.c
 export const searchDetailedDrinkByIdRequest = (id) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
   .then((response) => response.json())
   .then((result) => result);
+
 export const searchDrinkFirstLetterRequest = (word) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${word}`)
   .then((response) => response.json())
   .then((result) => result);
@@ -54,3 +55,7 @@ export const returnSmallIngredientPhotoUrl = (IngredientesName) => `https://www.
 export const returnMediumIngredientPhotoUrl = (IngredientesName) => `https://www.thecocktaildb.com/images/ingredients/${IngredientesName}-Medium.png`;
 
 export const returnLargeIngredientPhotoUrl = (IngredientesName) => `https://www.thecocktaildb.com/images/ingredients/${IngredientesName}.png`;
+
+export const searchInitialDrink = () => fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+  .then((response) => response.json())
+  .then((result) => result);

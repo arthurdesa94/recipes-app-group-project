@@ -1,3 +1,7 @@
+body {
+  min-width: 360px;
+}
+
 .footer {
   bottom: 0;
   position: fixed;
@@ -5,4 +9,19 @@
 
 .header {
   display: flex;
+}
+
+.recommedation {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+}
+
+.recommedation-card {
+  width: 50%;
+}
+
+.recommedation-image {
+  height: 50%;
 }

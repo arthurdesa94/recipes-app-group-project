@@ -1,11 +1,15 @@
+import { set } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../actions';
 import * as API from '../services/foodApi';
 
 function FoodsDetails({ match }) {
+  const lastPage = 2;
+  const firstPage = 0;
   const [response, setResponse] = useState([]);
-  const [recommendation, setRecommedation] = useState([]);
+  const [recommendation, setRecommedation ] = useState([]);
+  const [carouselState, setCarousel] = useState(firstPage);
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, details } = useSelector((state) => state.recipes);
@@ -27,16 +31,23 @@ function FoodsDetails({ match }) {
     return ingredients;
   };
 
+  const carouselBase = () => {
+    const startIndex = 0;
+    const secondIndex = 2;
+    const fourthIndex = 4;
+    const sixthIndex = 6;
+    const array = [
+      [response.slice(startIndex, secondIndex)],
+      [response.slice(secondIndex, fourthIndex)],
+      [response.slice(fourthIndex, sixthIndex)],
+    ];
+    console.log(array);
+    setRecommedation(array[carouselState]);
+  };
+
   const fetchRecommendation = async () => {
     const data = await API.searchInitial();
     setResponse(data.meals);
-  };
-
-  const horizontalMakerFunc = () => {
-    const firstItem = 0;
-    const lastItem = 6;
-    const array = [...response.slice(firstItem, lastItem)];
-    setRecommedation(array);
   };
 
   useEffect(() => {
@@ -46,10 +57,17 @@ function FoodsDetails({ match }) {
   }, []);
 
   useEffect(() => {
-    horizontalMakerFunc();
+    carouselBase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response]);
-
+  }, [response, carouselState]);
+  const handleClickCarouselRight = () => {
+    if (carouselState === lastPage) return setCarousel(firstPage);
+    setCarousel(carouselState + 1);
+  };
+  const handleClickCarouselLeft = () => {
+    if (carouselState === firstPage) return setCarousel(lastPage);
+    setCarousel(carouselState - 1);
+  };
   if (loading) return <h1>Loading...</h1>;
   return (
     <div>
@@ -101,17 +119,15 @@ function FoodsDetails({ match }) {
               gyroscope; picture-in-picture"
               allowFullScreen
             />
-            <div className="recommedation">
-              {recommendation.map((element, index) => (
-                <div
-                  className="recommedation-card"
-                  data-testid={ `${index}-recomendation-card` }
-                  key={ element.idMeal }
-                >
-                  <img className="recommendation-image" src={ element.strMealThumb } alt="recipeImg" />
-                  <p>{element.strMeal}</p>
+            <div>
+              <button onClick={ handleClickCarouselLeft } type="button">{'<'}</button>
+              {recommendation[0].map((element) => (
+                <div key={ element.idMeal }>
+                  <img src={ element.strMealThumb } alt="recipeImg" />
+                  <p>{ element.strMeal }</p>
                 </div>
               ))}
+              <button onClick={ handleClickCarouselRight } type="button">{'>'}</button>
             </div>
             <button type="button" data-testid="start-recipe-btn">
               Iniciar receita

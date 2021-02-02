@@ -1,11 +1,12 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function RecipeDrinkCard() {
   const { recipesDrink, loading } = useSelector((state) => state.recipes);
   const size = recipesDrink.length;
   const maxListSize = 11;
+
   const returnRecipes = () => {
     if (size === 1) {
       if (recipesDrink[0].error === null) {
@@ -18,14 +19,16 @@ function RecipeDrinkCard() {
       return recipesDrink.map(({ strDrink, idDrink, strDrinkThumb }, index) => {
         if (index <= maxListSize) {
           return (
-            <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ strDrinkThumb }
-                alt="recipeimage"
-              />
-              <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-            </div>
+            <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
+              <div data-testid={ `${index}-recipe-card` }>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ strDrinkThumb }
+                  alt="recipeimage"
+                />
+                <p data-testid={ `${index}-card-name` }>{strDrink}</p>
+              </div>
+            </Link>
           );
         }
         return '';
