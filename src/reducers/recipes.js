@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   recipes: [],
   recipesDrink: [],
 };
+
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
   let drink;

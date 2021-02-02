@@ -8,6 +8,8 @@ const RETRIEVE_RECIPES = 'RETRIEVE_RECIPES';
 const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
 const SET_SEARCH = 'SET_SEARCH';
 
+// ----------------------------------------- ACTIONS DE USUÁRIO E MOSTRAR A SEARCHBAR
+
 export const signIn = (email) => ({
   type: SIGN_IN,
   email,
@@ -18,15 +20,10 @@ export const setForSearchBar = (setter) => ({
   setter,
 });
 
-//-------------------------------------------------
+// ------------------------------------------------- ACTIONS RELACIONADAS AO ARMAZENAMENTO DE COMIDAS
 
-const storageRecipes = (value) => ({
+export const storageRecipes = (value) => ({
   type: RETRIEVE_RECIPES,
-  value,
-});
-
-const storageDrinkRecipes = (value) => ({
-  type: RETRIEVE_DRINK_RECIPES,
   value,
 });
 
@@ -51,6 +48,27 @@ export const retrieveIngredientRecipes = (value) => async (dispatch) => {
   dispatch({ type: OK });
 };
 
+export const retrieveCategoryRecipes = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await API.searchFoodByCategory(value)
+    .then((result) => dispatch(storageRecipes(result)));
+  dispatch({ type: OK });
+};
+
+export const retrieveInitialRecipes = () => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await API.searchInitial()
+    .then((result) => dispatch(storageRecipes(result)));
+  dispatch({ type: OK });
+};
+
+// ------------------------------------------------- ACTIONS RELACIONADAS AO ARMAZENAMENTO DE BEBIDAS
+
+export const storageDrinkRecipes = (value) => ({
+  type: RETRIEVE_DRINK_RECIPES,
+  value,
+});
+
 export const retrieveDrinkNameRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
   await DRINKAPI.searchDrinkNameRequest(value)
@@ -70,5 +88,19 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
   await DRINKAPI.searchDrinkByMainIngredientsRequest(value)
     .then((result) => dispatch(storageDrinkRecipes(result)))
     .catch(() => dispatch(storageDrinkRecipes({ drinks: null })));
+  dispatch({ type: OK });
+};
+
+export const retrieveDrinkCategoryRecipes = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchDrinkByCategory(value)
+    .then((result) => dispatch(storageDrinkRecipes(result)));
+  dispatch({ type: OK });
+};
+
+export const retrieveDrinkInitialRecipes = () => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchInitialDrink()
+    .then((result) => dispatch(storageDrinkRecipes(result)));
   dispatch({ type: OK });
 };
