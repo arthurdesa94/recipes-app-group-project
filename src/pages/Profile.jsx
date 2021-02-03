@@ -36,6 +36,6 @@ function Profile() {
       </div>
     );
   };
-return (profileItems());
+  return (profileItems());
 }
 export default Profile;
