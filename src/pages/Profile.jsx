@@ -34,7 +34,7 @@ function Profile() {
             onClick={ () => eraseLocalStorage() }
             data-testid="profile-logout-btn"
           >
-          Sair
+            Sair
           </button>
         </Link>
         <MenuInferior />
@@ -42,5 +42,5 @@ function Profile() {
     );
   };
   return (profileItems());
-  }
+}
 export default Profile;
