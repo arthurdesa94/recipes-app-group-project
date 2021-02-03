@@ -26,7 +26,7 @@ function Profile() {
           Receitas Favoritas
         </Link>
         <Link
-        to="/"
+          to="/"
           onClick={ () => eraseLocalStorage() }
           data-testid="profile-logout-btn"
         >
