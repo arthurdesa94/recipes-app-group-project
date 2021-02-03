@@ -13,34 +13,26 @@ function Profile() {
       <div>
         <Header title="Profile" />
         <h4 data-testid="profile-email">{ email }</h4>
-        <Link to="/receitas-feitas">
-          <button
-            type="button"
-            data-testid="profile-done-btn"
-          >
-            Receitas Feitas
-          </button>
+        <Link to="/receitas-feitas"
+        data-testid="profile-done-btn"
+        >
+          Receitas Feitas
         </Link>
-        <Link to="/receitas-favoritas">
-          <button
-            type="button"
-            data-testid="profile-favorite-btn"
-          >
-            Receitas Favoritas
-          </button>
+        <Link to="/receitas-favoritas"
+        data-testid="profile-favorite-btn"
+        >
+          Receitas Favoritas
         </Link>
-        <Link to="/">
-          <button
-            onClick={ () => eraseLocalStorage() }
-            data-testid="profile-logout-btn"
-          >
-            Sair
-          </button>
+        <Link to="/"
+        onClick={ () => eraseLocalStorage() }
+        data-testid="profile-logout-btn"
+        >
+          Sair
         </Link>
         <MenuInferior />
       </div>
     );
   };
-  return (profileItems());
+return (profileItems());
 }
 export default Profile;
