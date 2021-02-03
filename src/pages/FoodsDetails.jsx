@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../actions';
-import * as API from '../services/foodApi';
+import * as drinkAPI from '../services/drinkApi';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-function FoodsDetails({ match }) {
+const copy = require('clipboard-copy');
+
+function FoodsDetails({ match, location }) {
+  const [favorite, setFavorite] = useState(false);
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
+  const [copyLink, setCopyLink] = useState(false);
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, details } = useSelector((state) => state.recipes);
@@ -27,9 +34,37 @@ function FoodsDetails({ match }) {
     return ingredients;
   };
 
+  const favoriteFunc = () => {
+    const {
+      idMeal,
+      strArea: area,
+      strCategory: category,
+      strMeal: name,
+      strMealThumb: image,
+    } = details[0];
+    const favoriteObj = [
+      { id: idMeal, type: 'comida', area, category, alcoholicOrNot: '', name, image },
+    ];
+    const localStoreFav = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favorite) {
+      const removedRecipe = localStoreFav.filter((result) => result.id !== id);
+      const removedRecipeStringfy = JSON.stringify(removedRecipe);
+      setFavorite(false);
+      return localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+    }
+    setFavorite(true);
+    console.log(localStoreFav);
+    const firstRecipeCase = JSON.stringify(favoriteObj);
+    if (localStoreFav[0].id === '' || localStoreFav.length === 0) {
+      return localStorage.setItem('favoriteRecipes', firstRecipeCase);
+    }
+    const newRecipeStringfy = JSON.stringify([...favoriteObj, ...localStoreFav]);
+    return localStorage.setItem('favoriteRecipes', newRecipeStringfy);
+  };
+
   const fetchRecommendation = async () => {
-    const data = await API.searchInitial();
-    setResponse(data.meals);
+    const data = await drinkAPI.searchInitialDrink();
+    setResponse(data.drinks);
   };
 
   const horizontalMakerFunc = () => {
@@ -39,14 +74,25 @@ function FoodsDetails({ match }) {
     setRecommedation(array);
   };
 
+  const onClickCopy = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    setCopyLink(true);
+  };
+
   useEffect(() => {
     dispatch(Actions.retrieveFoodDetailsById(id));
     fetchRecommendation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const retriveFavoriteState = () => {
+    const atualLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    return setFavorite(atualLocalStorage.find((local) => local.id === id));
+  };
+
   useEffect(() => {
     horizontalMakerFunc();
+    retriveFavoriteState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 
@@ -63,16 +109,30 @@ function FoodsDetails({ match }) {
         }) => (
           <div key={ strMeal }>
             <img
+              className="header-image"
               data-testid="recipe-photo"
               src={ strMealThumb }
               alt="recipeImg"
             />
             <div>
-              <button type="submit" data-testid="favorite-btn">
+              <button
+                onMouseLeave={ () => setCopyLink(false) }
+                onClick={ onClickCopy }
+                type="button"
+                data-testid="share-btn"
+              >
                 Compartilhar
               </button>
-              <button type="submit" data-testid="share-btn">
-                Favoritar
+              {copyLink && <p>Link copiado!</p>}
+              <button
+                onClick={ favoriteFunc }
+                type="button"
+                data-testid="favorite-btn"
+              >
+                <img
+                  src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                  alt="heart"
+                />
               </button>
             </div>
             <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -92,8 +152,8 @@ function FoodsDetails({ match }) {
             <iframe
               data-testid="video"
               title={ strMeal }
-              width="560"
-              height="315"
+              width="256"
+              height="144"
               src={ strYoutube }
               frameBorder="0"
               allow="accelerometer; autoplay;
@@ -101,21 +161,31 @@ function FoodsDetails({ match }) {
               gyroscope; picture-in-picture"
               allowFullScreen
             />
-            <div className="recommedation">
+            <div className="recommendation">
               {recommendation.map((element, index) => (
                 <div
-                  className="recommedation-card"
+                  className="recommendation-card"
                   data-testid={ `${index}-recomendation-card` }
-                  key={ element.idMeal }
+                  key={ element.idDrink }
                 >
-                  <img className="recommendation-image" src={ element.strMealThumb } alt="recipeImg" />
-                  <p>{element.strMeal}</p>
+                  <img
+                    className="recommendation-image"
+                    src={ element.strDrinkThumb }
+                    alt="recipeImg"
+                  />
+                  <p data-testid={ `${index}-recomendation-title` }>
+                    {element.strDrink}
+                  </p>
                 </div>
               ))}
             </div>
-            <button type="button" data-testid="start-recipe-btn">
+            <Link
+              className="footer"
+              to={ `/comidas/${id}/in-progress` }
+              data-testid="start-recipe-btn"
+            >
               Iniciar receita
-            </button>
+            </Link>
           </div>
         ),
       )}

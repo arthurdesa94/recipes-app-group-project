@@ -11,17 +11,30 @@ body {
   display: flex;
 }
 
-.recommedation {
-  width: 100%;
+.recommendation {
+  flex: 1;
   display: flex;
   flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.recommendation:hover{
   overflow: auto;
 }
 
-.recommedation-card {
-  width: 50%;
+.recommendation-card {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  margin: 0 1px 0 0;
+  align-items: center;
+  min-width: 50%;
 }
 
-.recommedation-image {
-  height: 50%;
+.recommendation-image {
+  width: 100%;
+}
+
+.header-image {
+  width: 100%;
 }
