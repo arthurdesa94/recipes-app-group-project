@@ -31,7 +31,6 @@ function Profile() {
         </Link>
         <Link to="/">
           <button
-            type="button"
             onClick={ () => eraseLocalStorage() }
             data-testid="profile-logout-btn"
           >
@@ -42,6 +41,6 @@ function Profile() {
       </div>
     );
   };
-return (profileItems());
-}
+  return (profileItems());
+  }
 export default Profile;
