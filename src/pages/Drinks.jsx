@@ -9,12 +9,12 @@ import CategoryBar from '../components/CategoryBar';
 import * as Actions from '../actions/index';
 
 function Drinks({ location }) {
-  const { setter } = useSelector((state) => state.user);
+  const { setter, setterIngredient } = useSelector((state) => state.user);
   const searchBarView = setter;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Actions.retrieveDrinkInitialRecipes());
+    if (!setterIngredient) dispatch(Actions.retrieveDrinkInitialRecipes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
