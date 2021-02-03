@@ -9,6 +9,7 @@ const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
 const SET_SEARCH = 'SET_SEARCH';
 const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
 const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
+const SET_INGRIDIENT = 'SET_INGRIDIENT';
 
 // ----------------------------------------- ACTIONS DE USUÁRIO E MOSTRAR A SEARCHBAR
 
@@ -20,6 +21,11 @@ export const signIn = (email) => ({
 export const setForSearchBar = (setter) => ({
   type: SET_SEARCH,
   setter,
+});
+
+export const setForIngredient = (setterIngredient) => ({
+  type: SET_INGRIDIENT,
+  setterIngredient,
 });
 
 // ------------------------------------------------- ACTIONS RELACIONADAS AO ARMAZENAMENTO DE COMIDAS

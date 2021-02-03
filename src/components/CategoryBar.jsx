@@ -14,20 +14,18 @@ function CategoryBar({ type }) {
   const five = 5;
   const dispatch = useDispatch();
 
-  const fetchCategory = async () => {
-    if (type === 'foods') {
-      const data = await FOODAPI.allFoodCategoriesRequest();
-      setResponse(data.meals);
-    } else {
-      const data = await DRINKAPI.allDrinkCategoriesRequest();
-      setResponse(data.drinks);
-    }
-  };
-
   useEffect(() => {
+    const fetchCategory = async () => {
+      if (type === 'foods') {
+        const data = await FOODAPI.allFoodCategoriesRequest();
+        setResponse(data.meals);
+      } else {
+        const data = await DRINKAPI.allDrinkCategoriesRequest();
+        setResponse(data.drinks);
+      }
+    };
     fetchCategory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [type]);
 
   const handleClick = ({ target }) => {
     const { innerText } = target;

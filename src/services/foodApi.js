@@ -38,7 +38,7 @@ export const searchFoodByCategory = (category) => fetch(`https://www.themealdb.c
   .then((response) => response.json())
   .then((result) => result);
 
-export const searchFoodByArea = (area) => fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${area}`)
+export const searchFoodByArea = (area) => fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
   .then((response) => response.json())
   .then((result) => result);
 
