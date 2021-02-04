@@ -55,12 +55,18 @@ function CategoryBar({ type }) {
     setLastTarget(innerText);
   };
 
+  const handleAll = () => {
+    if (type === 'foods') dispatch(Actions.retrieveInitialRecipes());
+    else dispatch(Actions.retrieveDrinkInitialRecipes());
+  };
+
   // prettier-ignore
   return (
     <div>
       <button
         type="button"
         data-testid="All-category-filter"
+        onClick={ handleAll }
       >
         All
       </button>

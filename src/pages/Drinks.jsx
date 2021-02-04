@@ -30,7 +30,7 @@ function Drinks({ location }) {
 }
 
 Drinks.propTypes = {
-  location: PropTypes.arrayOf({
+  location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
 };
