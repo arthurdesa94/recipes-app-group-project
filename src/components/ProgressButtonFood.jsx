@@ -9,9 +9,8 @@ function ProgressButtonFood({ id, ingredients }) {
       .parse(localStorage.getItem('inProgressRecipes')) || {};
 
     const initialIndex = 0;
-    const arrayIng = ingredients().map((element) => {
-      return element.substring(initialIndex, element.indexOf(':'));
-    });
+    const arrayIng = ingredients().map((element) => element
+      .substring(initialIndex, element.indexOf(':')));
 
     localStorage.setItem(
       'inProgressRecipes',

@@ -22,7 +22,7 @@ function FoodRecipeProgress({ match }) {
     fetchApi();
 
     const arrayRecipe = Object.entries(
-      JSON.parse(localStorage.getItem('inProgressRecipes')).meals,
+      JSON.parse(localStorage.getItem('inProgressRecipes')).meals || [],
     );
     const findRecipe = arrayRecipe.find((element) => element[0] === id);
     setProgressRecipes(findRecipe[1]);
@@ -50,7 +50,7 @@ function FoodRecipeProgress({ match }) {
           </li>
         ))}
       </ul>
-      <p>{data.strInstructions}</p>
+      <p data-testid="instructions">{data.strInstructions}</p>
       <button type="button" data-testid="finish-recipe-btn">
         Finalizar Receita
       </button>
