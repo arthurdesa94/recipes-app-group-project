@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../actions';
 import * as drinkAPI from '../services/drinkApi';
 import FavoriteButtonFood from '../components/FavoriteButtonFood';
+import ProgressButtonFood from '../components/ProgressButtonFood';
 
 const copy = require('clipboard-copy');
 
@@ -135,13 +135,7 @@ function FoodsDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <Link
-              className="footer"
-              to={ `/comidas/${id}/in-progress` }
-              data-testid="start-recipe-btn"
-            >
-              Iniciar receita
-            </Link>
+            <ProgressButtonFood id={ id } ingredients={ retrieveIngredients } />
           </div>
         ),
       )}
