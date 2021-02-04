@@ -13,6 +13,7 @@ body {
 
 .recommendation {
   display: flex;
+  flex: 1;
   flex-wrap: nowrap;
   flex: 1;
   overflow: hidden;
