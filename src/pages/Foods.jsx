@@ -15,8 +15,7 @@ function Foods({ location }) {
 
   useEffect(() => {
     if (!setterIngredient) dispatch(Actions.retrieveInitialRecipes());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, setterIngredient]);
 
   return (
     <div>

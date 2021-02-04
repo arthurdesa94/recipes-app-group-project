@@ -15,8 +15,7 @@ function Drinks({ location }) {
 
   useEffect(() => {
     if (!setterIngredient) dispatch(Actions.retrieveDrinkInitialRecipes());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, setterIngredient]);
 
   return (
     <div>
