@@ -1,9 +1,11 @@
 // craco.config.js
+const tailwindcss = require('tailwindcss');
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
   style: {
     postcss: {
-      // eslint-disable-next-line global-require
-      plugins: [require('tailwindcss'), require('autoprefixer')],
+      plugins: [tailwindcss, autoprefixer],
     },
   },
 };
