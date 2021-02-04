@@ -7,6 +7,8 @@ const OK = 'OK';
 const RETRIEVE_RECIPES = 'RETRIEVE_RECIPES';
 const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
 const SET_SEARCH = 'SET_SEARCH';
+const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
+const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
 const SET_INGRIDIENT = 'SET_INGRIDIENT';
 
 // ----------------------------------------- ACTIONS DE USUÁRIO E MOSTRAR A SEARCHBAR
@@ -30,6 +32,11 @@ export const setForIngredient = (setterIngredient) => ({
 
 export const storageRecipes = (value) => ({
   type: RETRIEVE_RECIPES,
+  value,
+});
+
+const storageFoodDetails = (value) => ({
+  type: RETRIEVE_FOOD_DETAILS,
   value,
 });
 
@@ -68,10 +75,23 @@ export const retrieveInitialRecipes = () => async (dispatch) => {
   dispatch({ type: OK });
 };
 
+export const retrieveFoodDetailsById = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await API.searchFoodByIdRequest(value)
+    .then((result) => dispatch(storageFoodDetails(result)))
+    .catch(() => dispatch(storageFoodDetails({ drinks: null })));
+  dispatch({ type: OK });
+};
+
 // ------------------------------------------------- ACTIONS RELACIONADAS AO ARMAZENAMENTO DE BEBIDAS
 
 export const storageDrinkRecipes = (value) => ({
   type: RETRIEVE_DRINK_RECIPES,
+  value,
+});
+
+const storageDrinkDetails = (value) => ({
+  type: RETRIEVE_DRINK_DETAILS,
   value,
 });
 
@@ -94,6 +114,12 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
   await DRINKAPI.searchDrinkByMainIngredientsRequest(value)
     .then((result) => dispatch(storageDrinkRecipes(result)))
     .catch(() => dispatch(storageDrinkRecipes({ drinks: null })));
+  dispatch({ type: OK });
+};
+export const retrieveDrinkDetailsById = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchDetailedDrinkByIdRequest(value)
+    .then((result) => dispatch(storageDrinkDetails(result)));
   dispatch({ type: OK });
 };
 
