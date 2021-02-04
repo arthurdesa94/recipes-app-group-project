@@ -58,7 +58,7 @@ function DrinksDetails({ match, location }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading || !detailsDrink) return <h1>Loading...</h1>;
   return (
     <div>
       {detailsDrink.map(
