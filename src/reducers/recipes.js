@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   recipes: [],
   recipesDrink: [],
   details: [],
+  detailsDrink: [],
 };
 
 const recipes = (state = INITIAL_STATE, action) => {
@@ -33,9 +34,9 @@ const recipes = (state = INITIAL_STATE, action) => {
   case RETRIEVE_FOOD_DETAILS:
     action.value.meals[0].strYoutube = action.value.meals[0]
       .strYoutube.replace(/.com\/watch\?v=/, '.com/embed/');
-    console.log(action.value.meals[0].strYoutube);
-    console.log(action.value.meals[0].strYoutube);
     return { ...state, details: action.value.meals };
+  case RETRIEVE_DRINK_DETAILS:
+    return { ...state, detailsDrink: action.value.drinks };
   default:
     return state;
   }

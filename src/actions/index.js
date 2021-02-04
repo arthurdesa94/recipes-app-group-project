@@ -118,9 +118,8 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
 };
 export const retrieveDrinkDetailsById = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
-  await DRINKAPI.searchDrinkByIdRequest(value)
-    .then((result) => dispatch(storageDrinkDetails(result)))
-    .catch(() => dispatch(storageDrinkDetails({ drinks: null })));
+  await DRINKAPI.searchDetailedDrinkByIdRequest(value)
+    .then((result) => dispatch(storageDrinkDetails(result)));
   dispatch({ type: OK });
 };
 

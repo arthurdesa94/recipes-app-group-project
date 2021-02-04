@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-function FavoriteButton({ id }) {
+function FavoriteButtonFood({ id }) {
   const [favorite, setFavorite] = useState(false);
   const { details } = useSelector((state) => state.recipes);
   useEffect(() => {
@@ -64,4 +65,8 @@ function FavoriteButton({ id }) {
   );
 }
 
-export default FavoriteButton;
+FavoriteButtonFood.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
+export default FavoriteButtonFood;

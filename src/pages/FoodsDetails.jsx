@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../actions';
 import * as drinkAPI from '../services/drinkApi';
-import FavoriteButton from '../components/FavoriteButton';
+import FavoriteButtonFood from '../components/FavoriteButtonFood';
 
 const copy = require('clipboard-copy');
 
@@ -88,7 +89,7 @@ function FoodsDetails({ match, location }) {
                 Compartilhar
               </button>
               {copyLink && <p>Link copiado!</p>}
-              <FavoriteButton id={ id } />
+              <FavoriteButtonFood id={ id } />
             </div>
             <h1 data-testid="recipe-title">{strMeal}</h1>
             <p data-testid="recipe-category">{`Categoria: ${strCategory}`}</p>
@@ -147,5 +148,16 @@ function FoodsDetails({ match, location }) {
     </div>
   );
 }
+
+FoodsDetails.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default FoodsDetails;
