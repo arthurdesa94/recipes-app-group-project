@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import * as Actions from '../actions/index';
@@ -17,22 +17,6 @@ function Login(props) {
       [name]: value,
     });
   };
-
-  useEffect(() => {
-    if (!localStorage.getItem('favoriteRecipes')) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([
-        {
-          id: '',
-          type: '',
-          area: '',
-          category: '',
-          alcoholicOrNot: '',
-          name: '',
-          image: '',
-        },
-      ]));
-    }
-  }, []);
 
   const handleClick = () => {
     const { history } = props;
