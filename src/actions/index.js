@@ -116,12 +116,6 @@ export const retrieveDrinkIngredientRecipes = (value) => async (dispatch) => {
     .catch(() => dispatch(storageDrinkRecipes({ drinks: null })));
   dispatch({ type: OK });
 };
-export const retrieveDrinkDetailsById = (value) => async (dispatch) => {
-  dispatch({ type: LOADING });
-  await DRINKAPI.searchDetailedDrinkByIdRequest(value)
-    .then((result) => dispatch(storageDrinkDetails(result)));
-  dispatch({ type: OK });
-};
 
 export const retrieveDrinkCategoryRecipes = (value) => async (dispatch) => {
   dispatch({ type: LOADING });
@@ -134,5 +128,12 @@ export const retrieveDrinkInitialRecipes = () => async (dispatch) => {
   dispatch({ type: LOADING });
   await DRINKAPI.searchInitialDrink()
     .then((result) => dispatch(storageDrinkRecipes(result)));
+  dispatch({ type: OK });
+};
+
+export const retrieveDrinkDetailsById = (value) => async (dispatch) => {
+  dispatch({ type: LOADING });
+  await DRINKAPI.searchDetailedDrinkByIdRequest(value)
+    .then((result) => dispatch(storageDrinkDetails(result)));
   dispatch({ type: OK });
 };
