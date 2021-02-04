@@ -33,9 +33,9 @@ function ExploreDrinksIngredients() {
           <Link
             to="/bebidas"
             onClick={ () => handleClick(element.strIngredient1) }
+            key={ element.strIngredient1 }
           >
             <div
-              key={ element.strIngredient1 }
               data-testid={ `${index}-ingredient-card` }
             >
               <img

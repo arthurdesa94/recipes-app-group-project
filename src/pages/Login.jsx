@@ -72,7 +72,7 @@ function Login(props) {
       <label htmlFor="email">
         <input
           data-testid="email-input"
-          placeHolder="Insira o e-mail"
+          placeholder="Insira o e-mail"
           type="text"
           name="email"
           onChange={ handleChange }
@@ -82,7 +82,7 @@ function Login(props) {
       <label htmlFor="senha">
         <input
           data-testid="password-input"
-          placeHolder="Insira a senha"
+          placeholder="Insira a senha"
           type="password"
           name="senha"
           onChange={ handleChange }

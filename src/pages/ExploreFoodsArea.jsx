@@ -60,8 +60,8 @@ function ExploreFoodsArea() {
       <div>
         {cards.map(
           ({ strMeal, strMealThumb, idMeal }, index) => index < maxCards && (
-            <Link to={ `/comidas/${idMeal}` }>
-              <div key={ idMeal } data-testid={ `${index}-recipe-card` }>
+            <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
+              <div data-testid={ `${index}-recipe-card` }>
                 <img
                   src={ strMealThumb }
                   alt="meal-img"

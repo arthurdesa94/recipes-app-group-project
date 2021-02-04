@@ -15,8 +15,7 @@ function Drinks({ location }) {
 
   useEffect(() => {
     if (!setterIngredient) dispatch(Actions.retrieveDrinkInitialRecipes());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, setterIngredient]);
 
   return (
     <div>
@@ -30,7 +29,7 @@ function Drinks({ location }) {
 }
 
 Drinks.propTypes = {
-  location: PropTypes.arrayOf({
+  location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
 };
