@@ -2,7 +2,11 @@ body {
   min-width: 360px;
 }
 
+<<<<<<< HEAD
  input:checked + label {
+=======
+input[ type='checkbox' ]:checked+label {
+>>>>>>> 11c693ae39424e9dd2853350a41e48b6cd2578e9
   text-decoration: line-through;
 }
 
