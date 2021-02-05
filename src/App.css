@@ -2,7 +2,7 @@ body {
   min-width: 360px;
 }
 
- input[type=checkbox]:checked + label{
+input[ type='checkbox' ]:checked+label {
   text-decoration: line-through;
 }
 
