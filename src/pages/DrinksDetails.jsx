@@ -5,13 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../actions';
 import * as API from '../services/foodApi';
 import FavoriteButtonDrink from '../components/FavoriteButtonDrink';
-
-const copy = require('clipboard-copy');
+import CopyButton from '../components/CopyButton';
 
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
-  const [copyLink, setCopyLink] = useState(false);
+
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, detailsDrink } = useSelector((state) => state.recipes);
@@ -40,11 +39,6 @@ function DrinksDetails({ match, location }) {
     const lastItem = 6;
     const array = [...response.slice(firstItem, lastItem)];
     setRecommedation(array);
-  };
-
-  const onClickCopy = () => {
-    copy(`http://localhost:3000${location.pathname}`);
-    setCopyLink(true);
   };
 
   useEffect(() => {
@@ -77,15 +71,7 @@ function DrinksDetails({ match, location }) {
               alt="recipeImg"
             />
             <div>
-              <button
-                onMouseLeave={ () => setCopyLink(false) }
-                onClick={ onClickCopy }
-                type="button"
-                data-testid="share-btn"
-              >
-                Compartilhar
-              </button>
-              {copyLink && <p>Link copiado!</p>}
+              <CopyButton location={ location.pathname } />
               <FavoriteButtonDrink id={ id } />
             </div>
             <h1 data-testid="recipe-title">{strDrink}</h1>

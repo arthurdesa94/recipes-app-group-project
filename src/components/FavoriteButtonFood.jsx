@@ -51,11 +51,6 @@ function FavoriteButtonFood({ id, fetchAgain }) {
       return localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
     }
     setFavorite(true);
-    // const firstRecipeCase = JSON.stringify(favoriteObj);
-    // const emptyArray = 0;
-    // if (localStoreFav.length === emptyArray) {
-    //   return localStorage.setItem('favoriteRecipes', firstRecipeCase);
-    // }
     const newRecipeStringfy = JSON.stringify([
       ...favoriteObj,
       ...localStoreFav,

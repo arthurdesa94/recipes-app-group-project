@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function FoodIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
+function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
   const handleStorageAdd = (name) => {
     const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify({
         ...progressStorage,
-        meals: {
-          ...progressStorage.meals,
+        cocktails: {
+          ...progressStorage.cocktails,
           [id]: [
-            ...progressStorage.meals[id].filter((element) => element !== name),
+            ...progressStorage.cocktails[id].filter((element) => element !== name),
           ],
         },
       }),
@@ -24,9 +24,9 @@ function FoodIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
       'inProgressRecipes',
       JSON.stringify({
         ...progressStorage,
-        meals: {
-          ...progressStorage.meals,
-          [id]: [...progressStorage.meals[id], name],
+        cocktails: {
+          ...progressStorage.cocktails,
+          [id]: [...progressStorage.cocktails[id], name],
         },
       }),
     );
@@ -51,7 +51,7 @@ function FoodIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
 
   const returnCheckbox = (element) => {
     const progressStorage = JSON
-      .parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
+      .parse(localStorage.getItem('inProgressRecipes')).cocktails[id] || [];
     const filterProgress = progressStorage.some((ingredient) => element === ingredient);
     if (filterProgress) {
       return (
@@ -86,11 +86,11 @@ function FoodIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
   );
 }
 
-FoodIngredientsList.propTypes = {
+DrinkIngredientsList.propTypes = {
   getCheck: PropTypes.objectOf(PropTypes.bool).isRequired,
   id: PropTypes.string.isRequired,
   progressRecipes: PropTypes.arrayOf(PropTypes.string).isRequired,
   setCheck: PropTypes.func.isRequired,
 };
 
-export default FoodIngredientsList;
+export default DrinkIngredientsList;
