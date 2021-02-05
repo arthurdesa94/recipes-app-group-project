@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import * as Actions from '../actions/index';
 
-function FavoriteButtonFood({ id }) {
+function FavoriteButtonFood({ id, fetchAgain }) {
   const [favorite, setFavorite] = useState(false);
   const { details } = useSelector((state) => state.recipes);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const retriveFavoriteState = () => {
       const atualLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-      return setFavorite(atualLocalStorage.find((local) => local.id === id));
+      return setFavorite(atualLocalStorage.some((local) => local.id === id));
     };
     retriveFavoriteState();
   }, [id]);
+
+  useEffect(() => {
+    if (fetchAgain) {
+      dispatch(Actions.retrieveFoodDetailsById(id));
+    }
+  }, [id, dispatch, fetchAgain]);
+
   const favoriteFunc = () => {
     const {
       idMeal,
@@ -41,12 +51,6 @@ function FavoriteButtonFood({ id }) {
       return localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
     }
     setFavorite(true);
-    console.log(localStoreFav);
-    const firstRecipeCase = JSON.stringify(favoriteObj);
-    const emptyArray = 0;
-    if (localStoreFav.length === emptyArray) {
-      return localStorage.setItem('favoriteRecipes', firstRecipeCase);
-    }
     const newRecipeStringfy = JSON.stringify([
       ...favoriteObj,
       ...localStoreFav,
@@ -67,6 +71,7 @@ function FavoriteButtonFood({ id }) {
 
 FavoriteButtonFood.propTypes = {
   id: PropTypes.string.isRequired,
+  fetchAgain: PropTypes.string.isRequired,
 };
 
 export default FavoriteButtonFood;

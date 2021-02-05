@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as Actions from '../actions';
 import * as drinkAPI from '../services/drinkApi';
 import FavoriteButtonFood from '../components/FavoriteButtonFood';
-
-const copy = require('clipboard-copy');
+import CopyButton from '../components/CopyButton';
 
 function FoodsDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
-  const [copyLink, setCopyLink] = useState(false);
+
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, details } = useSelector((state) => state.recipes);
@@ -45,11 +44,6 @@ function FoodsDetails({ match, location }) {
     setRecommedation(array);
   };
 
-  const onClickCopy = () => {
-    copy(`http://localhost:3000${location.pathname}`);
-    setCopyLink(true);
-  };
-
   useEffect(() => {
     dispatch(Actions.retrieveFoodDetailsById(id));
     fetchRecommendation();
@@ -80,15 +74,7 @@ function FoodsDetails({ match, location }) {
               alt="recipeImg"
             />
             <div>
-              <button
-                onMouseLeave={ () => setCopyLink(false) }
-                onClick={ onClickCopy }
-                type="button"
-                data-testid="share-btn"
-              >
-                Compartilhar
-              </button>
-              {copyLink && <p>Link copiado!</p>}
+              <CopyButton location={ location.pathname } />
               <FavoriteButtonFood id={ id } />
             </div>
             <h1 data-testid="recipe-title">{strMeal}</h1>
