@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-function FoodIngredientsList({ progressRecipes, id }) {
-  const [getCheck, setCheck] = useState({});
-
+function FoodIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
   const handleStorageAdd = (name) => {
     const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
@@ -90,8 +88,10 @@ function FoodIngredientsList({ progressRecipes, id }) {
 }
 
 FoodIngredientsList.propTypes = {
-  progressRecipes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getCheck: PropTypes.objectOf(PropTypes.bool).isRequired,
   id: PropTypes.string.isRequired,
+  progressRecipes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setCheck: PropTypes.func.isRequired,
 };
 
 export default FoodIngredientsList;
