@@ -35,9 +35,9 @@ function FoodRecipeProgress({ match }) {
   useEffect(() => {
     const handleStorage = () => {
       const progressStorage = JSON
-        .parse(localStorage.getItem('inProgressRecipes')) || {};
-
-      if (!progressRecipes.meals || progressRecipes.meals[id].length === 0) {
+        .parse(localStorage.getItem('inProgressRecipes')) || { meals: '' };
+      console.log(progressStorage)
+      if (progressRecipes.length !== 0 && !progressStorage.meals[id]) {
         localStorage.setItem(
           'inProgressRecipes',
           JSON.stringify({
@@ -68,7 +68,7 @@ function FoodRecipeProgress({ match }) {
       </button>
       <p data-testid="recipe-category">{data[0].strCategory}</p>
       <FavoriteButtonFood id={id} />
-      <FoodIngredientsList progressRecipes={progressRecipes} id={id} />
+      <FoodIngredientsList progressRecipes={progressRecipes} id={id} setProgressRecipes={ setProgressRecipes } />
       <p data-testid="instructions">{data[0].strInstructions}</p>
       <button type="button" data-testid="finish-recipe-btn">
         Finalizar Receita

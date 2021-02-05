@@ -5,25 +5,23 @@ function FoodIngredientsList({ progressRecipes, id }) {
   const [getCheck, setCheck] = useState({});
 
   const handleStorageAdd = (name) => {
-    const progressStorage = JSON.parse(
-      localStorage.getItem('inProgressRecipes'),
-    ) || {};
+    const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify({
         ...progressStorage,
         meals: {
           ...progressStorage.meals,
-          [id]: [...progressRecipes.filter((element) => element !== name)],
+          [id]: [
+            ...progressStorage.meals[id].filter((element) => element !== name),
+          ],
         },
       }),
     );
   };
 
   const handleStorageRemove = (name) => {
-    const progressStorage = JSON.parse(
-      localStorage.getItem('inProgressRecipes'),
-    ) || {};
+    const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify({
@@ -46,23 +44,45 @@ function FoodIngredientsList({ progressRecipes, id }) {
 
   const handleChange = ({ target }) => {
     const { name, checked } = target;
+    console.log(target);
     setCheck({
       ...getCheck,
       [name]: checked,
     });
-    const className = checked ? 'line-through' : '';
-    target.parentElement.className = className;
     handleStorage(name, checked);
+  };
+
+  const returnCheckbox = (element) => {
+    const progressStorage = JSON
+      .parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
+    const filterProgress = progressStorage.some((ingredient) => element === ingredient);
+    if (filterProgress) {
+      return (
+        <input
+          type="checkbox"
+          name={ element }
+          id={ element }
+          onChange={ handleChange }
+        />
+      );
+    }
+    return (
+      <input
+        type="checkbox"
+        name={ element }
+        id={ element }
+        onChange={ handleChange }
+        checked
+      />
+    );
   };
 
   return (
     <ul>
       {progressRecipes.map((element, index) => (
         <li data-testid={ `${index}-ingredient-step` } key={ element }>
-          <label htmlFor={ element }>
-            <input type="checkbox" name={ element } onChange={ handleChange } />
-            {element}
-          </label>
+          {returnCheckbox(element)}
+          <label htmlFor={ element }>{element}</label>
         </li>
       ))}
     </ul>

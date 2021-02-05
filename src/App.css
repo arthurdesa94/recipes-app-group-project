@@ -6,6 +6,10 @@ body {
   text-decoration: line-through;
 }
 
+ input[type=checkbox]:checked + label{
+  text-decoration: line-through;
+}
+
 .footer {
   bottom: 0;
   position: fixed;
