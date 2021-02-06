@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
-  const handleStorageAdd = (name) => {
+  const handleStorageRemove = (name) => {
     const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
       'inProgressRecipes',
@@ -18,7 +18,7 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
     );
   };
 
-  const handleStorageRemove = (name) => {
+  const handleStorageAdd = (name) => {
     const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     localStorage.setItem(
       'inProgressRecipes',
@@ -33,10 +33,10 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
   };
 
   const handleStorage = (name, checked) => {
-    if (checked) {
-      handleStorageAdd(name);
-    } else {
+    if (!checked) {
       handleStorageRemove(name);
+    } else {
+      handleStorageAdd(name);
     }
   };
 
@@ -60,6 +60,7 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
           name={ element }
           id={ element }
           onChange={ handleChange }
+          checked
         />
       );
     }
@@ -69,7 +70,6 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
         name={ element }
         id={ element }
         onChange={ handleChange }
-        checked
       />
     );
   };

@@ -4,6 +4,7 @@ import FavoriteButtonFood from '../components/FavoriteButtonFood';
 import FoodIngredientsList from '../components/FoodIngredientsList';
 import * as API from '../services/foodApi';
 import CopyButton from '../components/CopyButton';
+import DoneRecipeButtonFood from '../components/DoneRecipeButtonFood';
 
 function FoodRecipeProgress({ match, history }) {
   const [progressRecipes, setProgressRecipes] = useState([]);
@@ -12,10 +13,6 @@ function FoodRecipeProgress({ match, history }) {
   const [getCheck, setCheck] = useState({});
   const { params } = match;
   const { id } = params;
-
-  const handleClick = () => {
-    history.push('/receitas-feitas');
-  };
 
   // useEffect para setar data da API
   // prettier-ignore
@@ -43,7 +40,8 @@ function FoodRecipeProgress({ match, history }) {
 
     const handleStorage = () => {
       const progressStorage = JSON
-        .parse(localStorage.getItem('inProgressRecipes')) || { meals: '' };
+        .parse(localStorage
+          .getItem('inProgressRecipes')) || { meals: '', cocktails: '' };
       if (progressRecipes.length !== emptySize && !progressStorage.meals[id]) {
         localStorage.setItem(
           'inProgressRecipes',
@@ -51,7 +49,7 @@ function FoodRecipeProgress({ match, history }) {
             ...progressStorage,
             meals: {
               ...progressStorage.meals,
-              [id]: [...progressRecipes],
+              [id]: [],
             },
           }),
         );
@@ -59,27 +57,6 @@ function FoodRecipeProgress({ match, history }) {
     };
     handleStorage();
   }, [id, progressRecipes]);
-
-  const verifyLengthChecked = () => {
-    const emptySize = 0;
-    const progressStorage = JSON
-      .parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
-    if (progressStorage.length === emptySize) {
-      return true;
-    }
-  };
-
-  const buttonEnabled = () => (
-    <button type="button" data-testid="finish-recipe-btn" onClick={ handleClick }>
-      Finalizar Receita
-    </button>
-  );
-
-  const buttonDisabled = () => (
-    <button type="button" data-testid="finish-recipe-btn" disabled>
-      Finalizar Receita
-    </button>
-  );
 
   if (loading) return <div>Loading...</div>;
 
@@ -101,7 +78,12 @@ function FoodRecipeProgress({ match, history }) {
         getCheck={ getCheck }
       />
       <p data-testid="instructions">{data[0].strInstructions}</p>
-      {verifyLengthChecked() ? buttonEnabled() : buttonDisabled()}
+      <DoneRecipeButtonFood
+        history={ history }
+        id={ id }
+        data={ data }
+        progressRecipes={ progressRecipes }
+      />
     </div>
   );
 }
