@@ -41,7 +41,8 @@ function DrinkRecipeProgress({ match, history }) {
 
     const handleStorage = () => {
       const progressStorage = JSON
-        .parse(localStorage.getItem('inProgressRecipes')) || { cocktails: '', meals: '' };
+        .parse(localStorage
+          .getItem('inProgressRecipes')) || { cocktails: '', meals: '' };
       if (progressRecipes.length !== emptySize && !progressStorage.cocktails[id]) {
         localStorage.setItem(
           'inProgressRecipes',
@@ -49,7 +50,7 @@ function DrinkRecipeProgress({ match, history }) {
             ...progressStorage,
             cocktails: {
               ...progressStorage.cocktails,
-              [id]: [...progressRecipes],
+              [id]: [],
             },
           }),
         );
@@ -78,7 +79,12 @@ function DrinkRecipeProgress({ match, history }) {
         getCheck={ getCheck }
       />
       <p data-testid="instructions">{data[0].strInstructions}</p>
-      <DoneRecipeButtonDrink history={ history } id={ id } data={ data } />
+      <DoneRecipeButtonDrink
+        history={ history }
+        id={ id }
+        data={ data }
+        progressRecipes={ progressRecipes }
+      />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Actions from '../actions';
 import * as API from '../services/foodApi';
 import FavoriteButtonDrink from '../components/FavoriteButtonDrink';
 import CopyButton from '../components/CopyButton';
+import StartRecipeButtonDrink from '../components/StartRecipeButtonDrink';
 
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);
@@ -17,7 +17,10 @@ function DrinksDetails({ match, location }) {
     const ingredients = [];
     const maxIngredients = 15;
     for (let index = 1; index <= maxIngredients; index += 1) {
-      if (detailsDrink[0][`strIngredient${index}`] !== null) {
+      if (
+        detailsDrink[0][`strIngredient${index}`] !== null
+        && detailsDrink[0][`strIngredient${index}`] !== ''
+      ) {
         ingredients.push(
           `${detailsDrink[0][`strIngredient${index}`]}: ${
             detailsDrink[0][`strMeasure${index}`]
@@ -27,7 +30,6 @@ function DrinksDetails({ match, location }) {
     }
     return ingredients;
   };
-
   const fetchRecommendation = async () => {
     const data = await API.searchInitial();
     setResponse(data.meals);
@@ -106,13 +108,10 @@ function DrinksDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <Link
-              className="footer"
-              to={ `/bebidas/${id}/in-progress` }
-              data-testid="start-recipe-btn"
-            >
-              Iniciar receita
-            </Link>
+            <StartRecipeButtonDrink
+              id={ id }
+              ingredients={ retrieveIngredients() }
+            />
           </div>
         ),
       )}

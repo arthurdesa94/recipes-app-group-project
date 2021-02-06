@@ -5,7 +5,7 @@ import * as Actions from '../actions';
 import * as drinkAPI from '../services/drinkApi';
 import FavoriteButtonFood from '../components/FavoriteButtonFood';
 import CopyButton from '../components/CopyButton';
-import StartRecipeButton from '../components/StartRecipeButtonFood';
+import StartRecipeButtonFood from '../components/StartRecipeButtonFood';
 
 function FoodsDetails({ match, location }) {
   const [response, setResponse] = useState([]);
@@ -31,7 +31,6 @@ function FoodsDetails({ match, location }) {
     }
     return ingredients;
   };
-
   const fetchRecommendation = async () => {
     const data = await drinkAPI.searchInitialDrink();
     setResponse(data.drinks);
@@ -121,7 +120,7 @@ function FoodsDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <StartRecipeButton id={ id } />
+            <StartRecipeButtonFood id={ id } ingredients={ retrieveIngredients() } />
           </div>
         ),
       )}

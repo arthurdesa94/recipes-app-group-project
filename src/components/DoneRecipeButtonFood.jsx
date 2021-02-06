@@ -3,12 +3,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as Actions from '../actions';
 
-function DoneRecipeButtonDrink({ history, id, data, progressRecipes }) {
+function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
   const dispatch = useDispatch();
   const verifyLengthChecked = () => {
     const totalLength = progressRecipes.length;
     const progressStorage = JSON
-      .parse(localStorage.getItem('inProgressRecipes')).cocktails[id] || [];
+      .parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
     if (progressStorage.length === totalLength) {
       return true;
     }
@@ -16,7 +16,7 @@ function DoneRecipeButtonDrink({ history, id, data, progressRecipes }) {
 
   const handleClick = () => {
     console.log(data)
-    dispatch(Actions.storageDoneDrink(data));
+    dispatch(Actions.storageDoneRecipes(data));
     history.push('/receitas-feitas');
   };
 
@@ -37,7 +37,7 @@ function DoneRecipeButtonDrink({ history, id, data, progressRecipes }) {
   );
 }
 
-DoneRecipeButtonDrink.propTypes = {
+DoneRecipeButtonFood.propTypes = {
   data: PropTypes.arrayOf().isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -45,5 +45,4 @@ DoneRecipeButtonDrink.propTypes = {
   id: PropTypes.string.isRequired,
   progressRecipes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default DoneRecipeButtonDrink;
+export default DoneRecipeButtonFood;

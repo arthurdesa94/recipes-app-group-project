@@ -48,14 +48,14 @@ const recipes = (state = INITIAL_STATE, action) => {
     return { ...state, detailsDrink: action.value.drinks };
   case DONE_RECIPES_DRINK:
     doneRecipesDrink = JSON.stringify({
-      bebidas: [...state.bebidas, action.value],
       comidas: [...state.comidas],
+      bebidas: [...state.bebidas, action.value],
     });
     localStorage.setItem('doneRecipes', doneRecipesDrink);
     return {
       ...state,
-      bebidas: [...state.bebidas, action.value],
       comidas: [...state.comidas],
+      bebidas: [...state.bebidas, action.value],
     };
   case DONE_RECIPES_FOOD:
     doneRecipesFood = JSON.stringify({

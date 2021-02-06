@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-function StartRecipeButtonFood({ id, ingredients }) {
+function StartRecipeButtonDrink({ id, ingredients }) {
   const buttonContinue = () => (
     <Link
       className="footer"
-      to={ `/comidas/${id}/in-progress` }
+      to={ `/bebidas/${id}/in-progress` }
       data-testid="start-recipe-btn"
     >
       Continuar Receita
@@ -15,7 +15,7 @@ function StartRecipeButtonFood({ id, ingredients }) {
   const buttonInitial = () => (
     <Link
       className="footer"
-      to={ `/comidas/${id}/in-progress` }
+      to={ `/bebidas/${id}/in-progress` }
       data-testid="start-recipe-btn"
     >
       Iniciar receita
@@ -25,12 +25,12 @@ function StartRecipeButtonFood({ id, ingredients }) {
     const totalLength = ingredients.length;
     const progressStorage = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
-    ) || { meals: '' };
-    const idMeal = progressStorage.meals[id];
-    if (idMeal && idMeal.length === totalLength) {
+    ) || { cocktails: '' };
+    const idDrink = progressStorage.cocktails[id];
+    if (idDrink && idDrink.length === totalLength) {
       return <h1 className="footer">Parabéns, você já realizou esta receita!</h1>;
     } if (
-      !progressStorage.meals[id]
+      !progressStorage.cocktails[id]
     ) {
       return buttonInitial();
     }
@@ -40,9 +40,9 @@ function StartRecipeButtonFood({ id, ingredients }) {
   return <div>{verifyDoneRecipe()}</div>;
 }
 
-StartRecipeButtonFood.propTypes = {
+StartRecipeButtonDrink.propTypes = {
   id: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default StartRecipeButtonFood;
+export default StartRecipeButtonDrink;
