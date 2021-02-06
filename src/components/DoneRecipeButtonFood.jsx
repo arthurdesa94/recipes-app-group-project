@@ -15,7 +15,6 @@ function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
   };
 
   const handleClick = () => {
-    console.log(data)
     dispatch(Actions.storageDoneRecipes(data));
     history.push('/receitas-feitas');
   };
