@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as Actions from '../actions';
 import * as drinkAPI from '../services/drinkApi';
 import FavoriteButtonFood from '../components/FavoriteButtonFood';
 import CopyButton from '../components/CopyButton';
+import StartRecipeButton from '../components/StartRecipeButtonFood';
 
 function FoodsDetails({ match, location }) {
   const [response, setResponse] = useState([]);
@@ -121,13 +121,7 @@ function FoodsDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <Link
-              className="footer"
-              to={ `/comidas/${id}/in-progress` }
-              data-testid="start-recipe-btn"
-            >
-              Iniciar receita
-            </Link>
+            <StartRecipeButton id={ id } />
           </div>
         ),
       )}

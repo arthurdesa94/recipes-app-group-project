@@ -10,6 +10,8 @@ const SET_SEARCH = 'SET_SEARCH';
 const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
 const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
 const SET_INGRIDIENT = 'SET_INGRIDIENT';
+const DONE_RECIPES_DRINK = 'DONE_RECIPES_DRINK';
+const DONE_RECIPES_FOOD = 'DONE_RECIPES_FOOD';
 
 // ----------------------------------------- ACTIONS DE USUÁRIO E MOSTRAR A SEARCHBAR
 
@@ -32,6 +34,11 @@ export const setForIngredient = (setterIngredient) => ({
 
 export const storageRecipes = (value) => ({
   type: RETRIEVE_RECIPES,
+  value,
+});
+
+export const storageDoneRecipes = (value) => ({
+  type: DONE_RECIPES_FOOD,
   value,
 });
 
@@ -90,8 +97,13 @@ export const storageDrinkRecipes = (value) => ({
   value,
 });
 
-const storageDrinkDetails = (value) => ({
+export const storageDrinkDetails = (value) => ({
   type: RETRIEVE_DRINK_DETAILS,
+  value,
+});
+
+export const storageDoneDrink = (value) => ({
+  type: DONE_RECIPES_DRINK,
   value,
 });
 
