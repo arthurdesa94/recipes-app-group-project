@@ -10,6 +10,7 @@ import CopyButton from '../components/CopyButton';
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
+  const [defaultAPI, setDefault] = useState([]);
 
   const { id } = match.params;
   const dispatch = useDispatch();
@@ -51,7 +52,6 @@ function DrinksDetails({ match, location }) {
     horizontalMakerFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
-
   if (loading || !detailsDrink) return <h1>Loading...</h1>;
   return (
     <div>
