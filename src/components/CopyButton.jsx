@@ -28,11 +28,7 @@ function CopyButton({ location, testId = 'share-btn' }) {
 
 CopyButton.propTypes = {
   location: PropTypes.string.isRequired,
-  testId: PropTypes.string,
-};
-
-CopyButton.defaultProps = {
-  testId: string,
+  testId: PropTypes.string.isRequired,
 };
 
 export default CopyButton;

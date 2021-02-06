@@ -76,12 +76,11 @@ function FavoriteButtonFood({ id, fetchAgain, testId = 'favorite-btn', setTrue }
 FavoriteButtonFood.propTypes = {
   id: PropTypes.string.isRequired,
   fetchAgain: PropTypes.string.isRequired,
-  testId: PropTypes.string,
+  testId: PropTypes.string.isRequired,
   setTrue: PropTypes.func,
 };
 
 FavoriteButtonFood.defaultProps = {
-  testId: PropTypes.string,
   setTrue: PropTypes.undefined,
 };
 
