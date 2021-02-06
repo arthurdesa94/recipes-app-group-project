@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
 
-function FavoriteButtonFood({ id, fetchAgain }) {
+function FavoriteButtonFood({ id, fetchAgain, testId = 'favorite-btn' }) {
   const [favorite, setFavorite] = useState(false);
   const { details } = useSelector((state) => state.recipes);
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function FavoriteButtonFood({ id, fetchAgain }) {
   return (
     <button onClick={ favoriteFunc } type="button">
       <img
-        data-testid="favorite-btn"
+        data-testid={ testId }
         src={ favorite ? blackHeartIcon : whiteHeartIcon }
         alt="heart"
       />
@@ -72,6 +72,11 @@ function FavoriteButtonFood({ id, fetchAgain }) {
 FavoriteButtonFood.propTypes = {
   id: PropTypes.string.isRequired,
   fetchAgain: PropTypes.string.isRequired,
+  testId: PropTypes.string,
+};
+
+FavoriteButtonFood.defaultProps = {
+  testId: PropTypes.string,
 };
 
 export default FavoriteButtonFood;
