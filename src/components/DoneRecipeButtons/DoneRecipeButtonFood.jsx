@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import * as Actions from '../actions';
+import * as Actions from '../../actions';
 
 function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
   const dispatch = useDispatch();
