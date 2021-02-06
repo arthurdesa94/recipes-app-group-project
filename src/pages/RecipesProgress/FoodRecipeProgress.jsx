@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import FavoriteButtonFood from '../components/FavoriteButtonFood';
-import FoodIngredientsList from '../components/FoodIngredientsList';
-import * as API from '../services/foodApi';
-import CopyButton from '../components/CopyButton';
-import DoneRecipeButtonFood from '../components/DoneRecipeButtonFood';
+import FavoriteButtonFood from '../../components/FavoriteButtons/FavoriteButtonFood';
+import FoodIngredientsList from '../../components/IngredientLists/FoodIngredientsList';
+import * as API from '../../services/foodApi';
+import CopyButton from '../../components/CopyButton';
+import DoneRecipeButtonFood from
+  '../../components/DoneRecipeButtons/DoneRecipeButtonFood';
 
 function FoodRecipeProgress({ match, history }) {
   const [progressRecipes, setProgressRecipes] = useState([]);

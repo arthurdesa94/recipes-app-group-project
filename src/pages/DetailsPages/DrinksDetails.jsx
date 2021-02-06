@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as Actions from '../actions';
-import * as API from '../services/foodApi';
-import FavoriteButtonDrink from '../components/FavoriteButtonDrink';
-import CopyButton from '../components/CopyButton';
-import StartRecipeButtonDrink from '../components/StartRecipeButtonDrink';
+import * as Actions from '../../actions';
+import * as API from '../../services/foodApi';
+import FavoriteButtonDrink from '../../components/FavoriteButtons/FavoriteButtonDrink';
+import CopyButton from '../../components/CopyButton';
+import StartRecipeButtonDrink from
+  '../../components/StartRecipeButtons/StartRecipeButtonDrink';
 
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);

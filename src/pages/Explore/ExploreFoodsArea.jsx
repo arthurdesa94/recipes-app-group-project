@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import MenuInferior from '../components/MenuInferior';
-import Header from '../components/Header';
-import * as FOODAPI from '../services/foodApi';
+import MenuInferior from '../../components/MenuInferior';
+import Header from '../../components/Header';
+import * as FOODAPI from '../../services/foodApi';
 
 function ExploreFoodsArea() {
   const [data, setData] = useState([]);

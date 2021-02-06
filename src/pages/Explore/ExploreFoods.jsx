@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MenuInferior from '../components/MenuInferior';
-import Header from '../components/Header';
-import * as FOODAPI from '../services/foodApi';
+import MenuInferior from '../../components/MenuInferior';
+import Header from '../../components/Header';
+import * as FOODAPI from '../../services/foodApi';
 
 function ExploreFoods(props) {
   const handleClick = async () => {
