@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as Actions from '../actions';
 import * as API from '../services/foodApi';
 import FavoriteButtonDrink from '../components/FavoriteButtonDrink';
@@ -10,8 +10,11 @@ import CopyButton from '../components/CopyButton';
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
+<<<<<<< HEAD
   const [defaultAPI, setDefault] = useState([]);
 
+=======
+>>>>>>> 5e3d0b3fced300fb0a696afa175f7a0403d03873
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, detailsDrink } = useSelector((state) => state.recipes);

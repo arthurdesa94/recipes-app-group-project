@@ -43,7 +43,7 @@ function FoodRecipeProgress({ match, history }) {
 
     const handleStorage = () => {
       const progressStorage = JSON
-        .parse(localStorage.getItem('inProgressRecipes')) || { meals: '' };
+        .parse(localStorage.getItem('inProgressRecipes')) || { meals: '', cocktails: '' };
       if (progressRecipes.length !== emptySize && !progressStorage.meals[id]) {
         localStorage.setItem(
           'inProgressRecipes',
