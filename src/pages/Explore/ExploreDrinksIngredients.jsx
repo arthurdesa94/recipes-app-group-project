@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import MenuInferior from '../components/MenuInferior';
-import Header from '../components/Header';
-import * as FOODAPI from '../services/foodApi';
-import * as Actions from '../actions/index';
+import MenuInferior from '../../components/MenuInferior';
+import Header from '../../components/Header';
+import * as DRINKAPI from '../../services/drinkApi';
+import * as Actions from '../../actions/index';
 
-function ExploreFoodsIngredients() {
+function ExploreDrinksIngredients() {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const maxCards = 12;
 
   const handleClick = (ingredient) => {
-    dispatch(Actions.retrieveIngredientRecipes(ingredient));
+    dispatch(Actions.retrieveDrinkIngredientRecipes(ingredient));
     dispatch(Actions.setForIngredient(true));
   };
 
   useEffect(() => {
     const fetchAllIngredients = async () => {
-      const response = await FOODAPI.allFoodIngredientsRequest();
-      setData(response.meals);
+      const response = await DRINKAPI.allDrinkIngredientsRequest();
+      setData(response.drinks);
     };
     fetchAllIngredients();
   }, []);
@@ -31,21 +31,21 @@ function ExploreFoodsIngredients() {
       {data.map(
         (element, index) => index < maxCards && (
           <Link
-            to="/comidas"
-            onClick={ () => handleClick(element.strIngredient) }
-            key={ element.idIngredient }
+            to="/bebidas"
+            onClick={ () => handleClick(element.strIngredient1) }
+            key={ element.strIngredient1 }
           >
             <div
               data-testid={ `${index}-ingredient-card` }
             >
               <img
                 data-testid={ `${index}-card-img` }
-                src={ FOODAPI.returnSmallIngredientPhotoUrl(element.strIngredient) }
+                src={ DRINKAPI.returnSmallIngredientPhotoUrl(element.strIngredient1) }
                 alt="teste"
                 style={ { width: 300, height: 200 } }
               />
               <p data-testid={ `${index}-card-name` }>
-                {element.strIngredient}
+                {element.strIngredient1}
               </p>
             </div>
           </Link>
@@ -57,4 +57,4 @@ function ExploreFoodsIngredients() {
   );
 }
 
-export default ExploreFoodsIngredients;
+export default ExploreDrinksIngredients;

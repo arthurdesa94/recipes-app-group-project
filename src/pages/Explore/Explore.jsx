@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuInferior from '../components/MenuInferior';
-import Header from '../components/Header';
+import MenuInferior from '../../components/MenuInferior';
+import Header from '../../components/Header';
 
 function Explore() {
   return (

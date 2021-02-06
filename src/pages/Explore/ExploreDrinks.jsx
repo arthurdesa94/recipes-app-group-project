@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MenuInferior from '../components/MenuInferior';
-import Header from '../components/Header';
-import * as DRINKAPI from '../services/drinkApi';
+import MenuInferior from '../../components/MenuInferior';
+import Header from '../../components/Header';
+import * as DRINKAPI from '../../services/drinkApi';
 
 function ExploreDrinks(props) {
   const handleClick = async () => {
