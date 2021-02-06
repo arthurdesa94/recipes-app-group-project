@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import MenuInferior from '../components/MenuInferior';
-import SearchBar from '../components/SearchBar';
-import Header from '../components/Header';
-import RecipeDrinkCard from '../components/RecipeDrinkCard';
-import CategoryBar from '../components/CategoryBar';
-import * as Actions from '../actions/index';
+import MenuInferior from '../../components/MenuInferior';
+import SearchBar from '../../components/SearchBar';
+import Header from '../../components/Header';
+import RecipeDrinkCard from '../../components/RecipeCards/RecipeDrinkCard';
+import CategoryBar from '../../components/CategoryBar';
+import * as Actions from '../../actions/index';
 
 function Drinks({ location }) {
   const { setter, setterIngredient } = useSelector((state) => state.user);
