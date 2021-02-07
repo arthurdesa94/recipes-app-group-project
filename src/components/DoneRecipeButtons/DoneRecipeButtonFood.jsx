@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../../actions';
 
-function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
+function DoneRecipeButtonFood({ history, id, progressRecipes }) {
   const dispatch = useDispatch();
+  const { details } = useSelector((state) => state.recipes);
   const verifyLengthChecked = () => {
     const totalLength = progressRecipes.length;
     const progressStorage = JSON
@@ -15,7 +16,28 @@ function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
   };
 
   const handleClick = () => {
-    dispatch(Actions.storageDoneRecipes(data));
+    const {
+      idMeal,
+      strArea: area,
+      strCategory: category,
+      strMeal: name,
+      strMealThumb: image,
+      strTags,
+    } = details[0];
+    const favoriteObj = [
+      {
+        id: idMeal,
+        type: 'comida',
+        area,
+        category,
+        alcoholicOrNot: '',
+        name,
+        image,
+        doneDate: new Date().toLocaleDateString(),
+        tags: strTags ? strTags.split(',') : '',
+      },
+    ];
+    dispatch(Actions.storageDoneRecipes(favoriteObj));
     history.push('/receitas-feitas');
   };
 
@@ -37,7 +59,6 @@ function DoneRecipeButtonFood({ history, id, data, progressRecipes }) {
 }
 
 DoneRecipeButtonFood.propTypes = {
-  data: PropTypes.arrayOf().isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

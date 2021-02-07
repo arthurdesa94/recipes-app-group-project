@@ -4,8 +4,7 @@ const RETRIEVE_DRINK_RECIPES = 'RETRIEVE_DRINK_RECIPES';
 const RETRIEVE_FOOD_DETAILS = 'RETRIEVE_FOOD_DETAILS';
 const RETRIEVE_DRINK_DETAILS = 'RETRIEVE_DRINK_DETAILS';
 const OK = 'OK';
-const DONE_RECIPES_DRINK = 'DONE_RECIPES_DRINK';
-const DONE_RECIPES_FOOD = 'DONE_RECIPES_FOOD';
+const DONE_RECIPES_ADD = 'DONE_RECIPES_ADD';
 
 const INITIAL_STATE = {
   loading: false,
@@ -13,15 +12,14 @@ const INITIAL_STATE = {
   recipesDrink: [],
   details: [],
   detailsDrink: [],
-  bebidas: [],
-  comidas: [],
+  doneRecipes: [],
 };
 
 const recipes = (state = INITIAL_STATE, action) => {
   let meals;
   let drink;
-  let doneRecipesFood;
-  let doneRecipesDrink;
+  let doneRecipe;
+  let storageRecipes;
 
   switch (action.type) {
   case LOADING:
@@ -46,27 +44,13 @@ const recipes = (state = INITIAL_STATE, action) => {
     return { ...state, details: action.value.meals };
   case RETRIEVE_DRINK_DETAILS:
     return { ...state, detailsDrink: action.value.drinks };
-  case DONE_RECIPES_DRINK:
-    doneRecipesDrink = JSON.stringify({
-      comidas: [...state.comidas],
-      bebidas: [...state.bebidas, action.value],
-    });
-    localStorage.setItem('doneRecipes', doneRecipesDrink);
+  case DONE_RECIPES_ADD:
+    console.log(action.value);
+    storageRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    doneRecipe = JSON.stringify([...storageRecipes, action.value[0]]);
+    localStorage.setItem('doneRecipes', doneRecipe);
     return {
-      ...state,
-      comidas: [...state.comidas],
-      bebidas: [...state.bebidas, action.value],
-    };
-  case DONE_RECIPES_FOOD:
-    doneRecipesFood = JSON.stringify({
-      bebidas: [...state.bebidas],
-      comidas: [...state.comidas, action.value],
-    });
-    localStorage.setItem('doneRecipes', doneRecipesFood);
-    return {
-      ...state,
-      bebidas: [...state.bebidas],
-      comidas: [...state.comidas, action.value],
+      ...state, doneRecipes: [...storageRecipes, action.value[0]],
     };
   default:
     return state;

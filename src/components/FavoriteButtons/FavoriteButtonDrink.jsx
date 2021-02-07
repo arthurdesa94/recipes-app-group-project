@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
 
-function FavoriteButtonDrink({ id, fetchAgain, testId = 'favorite-btn' }) {
+function FavoriteButtonDrink({ id, fetchAgain, testId }) {
   const [favorite, setFavorite] = useState(false);
   const { detailsDrink } = useSelector((state) => state.recipes);
   const dispatch = useDispatch();
@@ -70,13 +70,15 @@ function FavoriteButtonDrink({ id, fetchAgain, testId = 'favorite-btn' }) {
 }
 
 FavoriteButtonDrink.propTypes = {
-  id: PropTypes.string.isRequired,
-  fetchAgain: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  fetchAgain: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   testId: PropTypes.string,
 };
 
 FavoriteButtonDrink.defaultProps = {
-  testId: PropTypes.string,
+  testId: 'favorite-btn',
+  fetchAgain: false,
+  id: '',
 };
 
 export default FavoriteButtonDrink;

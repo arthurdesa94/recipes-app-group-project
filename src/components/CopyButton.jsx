@@ -1,10 +1,10 @@
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-function CopyButton({ location, testId = 'share-btn' }) {
+function CopyButton({ location, testId }) {
   const [copyLink, setCopyLink] = useState(false);
 
   const onClickCopy = () => {
@@ -27,12 +27,13 @@ function CopyButton({ location, testId = 'share-btn' }) {
 }
 
 CopyButton.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.string,
   testId: PropTypes.string,
 };
 
 CopyButton.defaultProps = {
-  testId: string,
+  location: '',
+  testId: 'share-btn',
 };
 
 export default CopyButton;
