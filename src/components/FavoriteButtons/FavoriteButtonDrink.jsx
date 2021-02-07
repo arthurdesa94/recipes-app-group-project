@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
 
-function FavoriteButtonDrink({ id, fetchAgain, testId }) {
+function FavoriteButtonDrink({ id, fetchAgain, testId, setTrue }) {
   const [favorite, setFavorite] = useState(false);
   const { detailsDrink } = useSelector((state) => state.recipes);
   const dispatch = useDispatch();

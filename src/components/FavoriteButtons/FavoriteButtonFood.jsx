@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
 
-function FavoriteButtonFood({ id, fetchAgain, testId }) {
+function FavoriteButtonFood({ id, fetchAgain, testId, setTrue }) {
   const [favorite, setFavorite] = useState(false);
   const { details } = useSelector((state) => state.recipes);
   const dispatch = useDispatch();
@@ -49,6 +49,7 @@ function FavoriteButtonFood({ id, fetchAgain, testId }) {
       const removedRecipeStringfy = JSON.stringify(removedRecipe);
       setFavorite(false);
       localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+
       if (setTrue !== undefined) setTrue();
     } else {
       setFavorite(true);
