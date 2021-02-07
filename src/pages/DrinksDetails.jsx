@@ -1,16 +1,17 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Actions from '../../actions';
-import CopyButton from '../../components/CopyButton';
-import FavoriteButtonDrink from '../../components/FavoriteButtons/FavoriteButtonDrink';
-import StartRecipeButtonDrink from
-  '../../components/StartRecipeButtons/StartRecipeButtonDrink';
-import * as API from '../../services/foodApi';
+import * as Actions from '../actions';
+import * as API from '../services/foodApi';
+import FavoriteButtonDrink from '../components/FavoriteButtons/FavoriteButtonDrink';
+
+const copy = require('clipboard-copy');
 
 function DrinksDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
+  const [copyLink, setCopyLink] = useState(false);
   const { id } = match.params;
   const dispatch = useDispatch();
   const { loading, detailsDrink } = useSelector((state) => state.recipes);
@@ -18,10 +19,7 @@ function DrinksDetails({ match, location }) {
     const ingredients = [];
     const maxIngredients = 15;
     for (let index = 1; index <= maxIngredients; index += 1) {
-      if (
-        detailsDrink[0][`strIngredient${index}`] !== null
-        && detailsDrink[0][`strIngredient${index}`] !== ''
-      ) {
+      if (detailsDrink[0][`strIngredient${index}`] !== null) {
         ingredients.push(
           `${detailsDrink[0][`strIngredient${index}`]}: ${
             detailsDrink[0][`strMeasure${index}`]
@@ -31,6 +29,7 @@ function DrinksDetails({ match, location }) {
     }
     return ingredients;
   };
+
   const fetchRecommendation = async () => {
     const data = await API.searchInitial();
     setResponse(data.meals);
@@ -43,6 +42,11 @@ function DrinksDetails({ match, location }) {
     setRecommedation(array);
   };
 
+  const onClickCopy = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    setCopyLink(true);
+  };
+
   useEffect(() => {
     dispatch(Actions.retrieveDrinkDetailsById(id));
     fetchRecommendation();
@@ -53,7 +57,8 @@ function DrinksDetails({ match, location }) {
     horizontalMakerFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
-  if (loading || !detailsDrink) return <h1>Loading...</h1>;
+
+  if (loading) return <h1>Loading...</h1>;
   return (
     <div>
       {detailsDrink.map(
@@ -72,7 +77,15 @@ function DrinksDetails({ match, location }) {
               alt="recipeImg"
             />
             <div>
-              <CopyButton location={ location.pathname } />
+              <button
+                onMouseLeave={ () => setCopyLink(false) }
+                onClick={ onClickCopy }
+                type="button"
+                data-testid="share-btn"
+              >
+                Compartilhar
+              </button>
+              {copyLink && <p>Link copiado!</p>}
               <FavoriteButtonDrink id={ id } />
             </div>
             <h1 data-testid="recipe-title">{strDrink}</h1>
@@ -109,10 +122,13 @@ function DrinksDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <StartRecipeButtonDrink
-              id={ id }
-              ingredients={ retrieveIngredients() }
-            />
+            <Link
+              className="footer"
+              to={ `/bebidas/${id}/in-progress` }
+              data-testid="start-recipe-btn"
+            >
+              Iniciar receita
+            </Link>
           </div>
         ),
       )}

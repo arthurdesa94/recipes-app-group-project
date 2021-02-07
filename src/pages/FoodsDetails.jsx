@@ -1,39 +1,41 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Actions from '../../actions';
-import CopyButton from '../../components/CopyButton';
-import FavoriteButtonDrink from '../../components/FavoriteButtons/FavoriteButtonDrink';
-import StartRecipeButtonDrink from
-  '../../components/StartRecipeButtons/StartRecipeButtonDrink';
-import * as API from '../../services/foodApi';
+import * as Actions from '../actions';
+import * as drinkAPI from '../services/drinkApi';
+import FavoriteButtonFood from '../components/FavoriteButtons/FavoriteButtonFood';
 
-function DrinksDetails({ match, location }) {
+const copy = require('clipboard-copy');
+
+function FoodsDetails({ match, location }) {
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
+  const [copyLink, setCopyLink] = useState(false);
   const { id } = match.params;
   const dispatch = useDispatch();
-  const { loading, detailsDrink } = useSelector((state) => state.recipes);
+  const { loading, details } = useSelector((state) => state.recipes);
   const retrieveIngredients = () => {
     const ingredients = [];
-    const maxIngredients = 15;
+    const maxIngredients = 20;
     for (let index = 1; index <= maxIngredients; index += 1) {
       if (
-        detailsDrink[0][`strIngredient${index}`] !== null
-        && detailsDrink[0][`strIngredient${index}`] !== ''
+        details[0][`strIngredient${index}`] !== ''
+        && details[0][`strIngredient${index}`] !== null
       ) {
         ingredients.push(
-          `${detailsDrink[0][`strIngredient${index}`]}: ${
-            detailsDrink[0][`strMeasure${index}`]
+          `${details[0][`strIngredient${index}`]}: ${
+            details[0][`strMeasure${index}`]
           }`,
         );
       }
     }
     return ingredients;
   };
+
   const fetchRecommendation = async () => {
-    const data = await API.searchInitial();
-    setResponse(data.meals);
+    const data = await drinkAPI.searchInitialDrink();
+    setResponse(data.drinks);
   };
 
   const horizontalMakerFunc = () => {
@@ -43,8 +45,13 @@ function DrinksDetails({ match, location }) {
     setRecommedation(array);
   };
 
+  const onClickCopy = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    setCopyLink(true);
+  };
+
   useEffect(() => {
-    dispatch(Actions.retrieveDrinkDetailsById(id));
+    dispatch(Actions.retrieveFoodDetailsById(id));
     fetchRecommendation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,32 +60,39 @@ function DrinksDetails({ match, location }) {
     horizontalMakerFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
-  if (loading || !detailsDrink) return <h1>Loading...</h1>;
+
+  if (loading) return <h1>Loading...</h1>;
   return (
     <div>
-      {detailsDrink.map(
+      {details.map(
         ({
-          strAlcoholic,
-          strDrinkThumb,
-          strDrink,
+          strMealThumb,
+          strMeal,
           strCategory,
           strInstructions,
+          strYoutube,
         }) => (
-          <div key={ strDrink }>
+          <div key={ strMeal }>
             <img
               className="header-image"
               data-testid="recipe-photo"
-              src={ strDrinkThumb }
+              src={ strMealThumb }
               alt="recipeImg"
             />
             <div>
-              <CopyButton location={ location.pathname } />
-              <FavoriteButtonDrink id={ id } />
+              <button
+                onMouseLeave={ () => setCopyLink(false) }
+                onClick={ onClickCopy }
+                type="button"
+                data-testid="share-btn"
+              >
+                Compartilhar
+              </button>
+              {copyLink && <p>Link copiado!</p>}
+              <FavoriteButtonFood id={ id } />
             </div>
-            <h1 data-testid="recipe-title">{strDrink}</h1>
-            <p data-testid="recipe-category">
-              {`Categoria: ${strCategory} ${strAlcoholic}`}
-            </p>
+            <h1 data-testid="recipe-title">{strMeal}</h1>
+            <p data-testid="recipe-category">{`Categoria: ${strCategory}`}</p>
             <h4>Ingredientes</h4>
             <ul>
               {retrieveIngredients().map((ingredients, index) => (
@@ -91,28 +105,43 @@ function DrinksDetails({ match, location }) {
               ))}
             </ul>
             <p data-testid="instructions">{`Instruções: ${strInstructions}`}</p>
+            <iframe
+              data-testid="video"
+              title={ strMeal }
+              width="256"
+              height="144"
+              src={ strYoutube }
+              frameBorder="0"
+              allow="accelerometer; autoplay;
+              clipboard-write; encrypted-media;
+              gyroscope; picture-in-picture"
+              allowFullScreen
+            />
             <div className="recommendation">
               {recommendation.map((element, index) => (
                 <div
                   className="recommendation-card"
                   data-testid={ `${index}-recomendation-card` }
-                  key={ element.idMeal }
+                  key={ element.idDrink }
                 >
                   <img
                     className="recommendation-image"
-                    src={ element.strMealThumb }
+                    src={ element.strDrinkThumb }
                     alt="recipeImg"
                   />
                   <p data-testid={ `${index}-recomendation-title` }>
-                    {element.strMeal}
+                    {element.strDrink}
                   </p>
                 </div>
               ))}
             </div>
-            <StartRecipeButtonDrink
-              id={ id }
-              ingredients={ retrieveIngredients() }
-            />
+            <Link
+              className="footer"
+              to={ `/comidas/${id}/in-progress` }
+              data-testid="start-recipe-btn"
+            >
+              Iniciar receita
+            </Link>
           </div>
         ),
       )}
@@ -120,7 +149,7 @@ function DrinksDetails({ match, location }) {
   );
 }
 
-DrinksDetails.propTypes = {
+FoodsDetails.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
@@ -131,4 +160,4 @@ DrinksDetails.propTypes = {
   }).isRequired,
 };
 
-export default DrinksDetails;
+export default FoodsDetails;

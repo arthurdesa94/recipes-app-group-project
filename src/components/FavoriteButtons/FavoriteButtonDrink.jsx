@@ -48,15 +48,19 @@ function FavoriteButtonDrink({ id, fetchAgain, testId }) {
       const removedRecipe = localStoreFav.filter((result) => result.id !== id);
       const removedRecipeStringfy = JSON.stringify(removedRecipe);
       setFavorite(false);
-      return localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+      localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+      if (setTrue !== undefined) setTrue();
+    } else {
+      setFavorite(true);
+      const newRecipeStringfy = JSON.stringify([
+        ...favoriteObj,
+        ...localStoreFav,
+      ]);
+      localStorage.setItem('favoriteRecipes', newRecipeStringfy);
     }
-    setFavorite(true);
-    const newRecipeStringfy = JSON.stringify([
-      ...favoriteObj,
-      ...localStoreFav,
-    ]);
-    return localStorage.setItem('favoriteRecipes', newRecipeStringfy);
   };
+
+  if (!detailsDrink[0]) return <h1>Loading...</h1>;
 
   return (
     <button onClick={ favoriteFunc } type="button">
