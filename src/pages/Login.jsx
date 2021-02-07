@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import * as Actions from '../actions/index';
 
 function Login(props) {
@@ -40,41 +42,58 @@ function Login(props) {
   };
 
   const buttonEnabled = () => (
-    <button data-testid="login-submit-btn" type="button" onClick={ handleClick }>
-      Entrar
+    <button
+      className="transition-all animate-pulse duration-500 text-center mt-4 border-b-2 border-green-300 rounded-lg w-20 h-20 rounded-full"
+      data-testid="login-submit-btn"
+      type="button"
+      onClick={ handleClick }
+    >
+      <FontAwesomeIcon size="4x" className="fill-current text-green-300" icon={ faArrowAltCircleRight } />
     </button>
   );
 
   const buttonDisabled = () => (
-    <button data-testid="login-submit-btn" type="button" disabled>
-      Entrar
+    <button
+      className="transition-all duration-500 text-center opacity-40 rounded-lg w-20 h-20 rounded-full"
+      data-testid="login-submit-btn"
+      type="button"
+      disabled
+    >
+      <FontAwesomeIcon size="4x" className="fill-current text-white" icon={ faArrowAltCircleRight } />
     </button>
   );
 
   return (
-    <form>
-      <label htmlFor="email">
-        <input
-          data-testid="email-input"
-          placeholder="Insira o e-mail"
-          type="text"
-          name="email"
-          onChange={ handleChange }
-          value={ state.email }
-        />
-      </label>
-      <label htmlFor="senha">
-        <input
-          data-testid="password-input"
-          placeholder="Insira a senha"
-          type="password"
-          name="senha"
-          onChange={ handleChange }
-          value={ state.senha }
-        />
-      </label>
-      {verifyEmailAndPassword() ? buttonEnabled() : buttonDisabled()}
-    </form>
+    <div className="overflow-hidden">
+      <div className="absolute text-shadow bg-left bg-login-image  bg-cover z-30 h-screen flex overflow-hidden justify-center flex-column items-center h-screen w-screen">
+        <h1 className="subpixel-antialiased text-shadow text-center text-center rounded-lg mx-auto font-pacifico text-white z-50 w-auto text-6xl">TrybeLicious!</h1>
+        <form className="flex blur mt-8 bg-clip-padding flex-column border-b-4 border-t-4 z-50 rounded-xl border-white justify-center items-center p-4 shadow-xl w-10/12 h-60">
+          <label className="w-11/12 h-1/3" htmlFor="email">
+            <input
+              className="focus:outline-none w-full h-full opacity-80 focus:opacity-100  text-center border-b-2 border-white focus:border-green-300 rounded-lg"
+              data-testid="email-input"
+              placeholder="Insira o e-mail"
+              type="text"
+              name="email"
+              onChange={ handleChange }
+              value={ state.email }
+            />
+          </label>
+          <label className="w-11/12 h-1/3" htmlFor="senha">
+            <input
+              className="focus:outline-none w-full h-full opacity-80 focus:opacity-100 text-center border-b-2 border-white focus:border-green-300 rounded-lg"
+              data-testid="password-input"
+              placeholder="Insira a senha"
+              type="password"
+              name="senha"
+              onChange={ handleChange }
+              value={ state.senha }
+            />
+          </label>
+        </form>
+        {verifyEmailAndPassword() ? buttonEnabled() : buttonDisabled()}
+      </div>
+    </div>
   );
 }
 

@@ -32,7 +32,7 @@ function SearchBar({ location }) {
   };
 
   return (
-    <form>
+    <form className="transition-all duration-500">
       <label htmlFor="searchBar">
         <input
           data-testid="search-input"

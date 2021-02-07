@@ -19,8 +19,10 @@ function Drinks({ location }) {
 
   return (
     <div>
-      <Header title="Bebidas" />
-      {searchBarView && <SearchBar location={ location.pathname } />}
+      <div className="bg-gradient-to-r from-green-100 to-green-300 blur bg-opacity-40 rounded-b-2xl shadow-sm">
+        <Header title="Bebidas" />
+        {searchBarView && <SearchBar location={ location.pathname } />}
+      </div>
       <CategoryBar type="drinks" />
       <RecipeDrinkCard />
       <MenuInferior />
