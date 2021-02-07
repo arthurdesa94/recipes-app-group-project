@@ -77,6 +77,7 @@ FavoriteButtonDrink.propTypes = {
   id: PropTypes.string,
   fetchAgain: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   testId: PropTypes.string,
+  setTrue: PropTypes.func.isRequired,
 };
 
 FavoriteButtonDrink.defaultProps = {
