@@ -5,7 +5,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
 
-function FavoriteButtonDrink({ id, fetchAgain }) {
+function FavoriteButtonDrink({ id, fetchAgain, testId = 'favorite-btn', setTrue }) {
   const [favorite, setFavorite] = useState(false);
   const { detailsDrink } = useSelector((state) => state.recipes);
   const dispatch = useDispatch();
@@ -48,20 +48,24 @@ function FavoriteButtonDrink({ id, fetchAgain }) {
       const removedRecipe = localStoreFav.filter((result) => result.id !== id);
       const removedRecipeStringfy = JSON.stringify(removedRecipe);
       setFavorite(false);
-      return localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+      localStorage.setItem('favoriteRecipes', removedRecipeStringfy);
+      if (setTrue !== undefined) setTrue();
+    } else {
+      setFavorite(true);
+      const newRecipeStringfy = JSON.stringify([
+        ...favoriteObj,
+        ...localStoreFav,
+      ]);
+      localStorage.setItem('favoriteRecipes', newRecipeStringfy);
     }
-    setFavorite(true);
-    const newRecipeStringfy = JSON.stringify([
-      ...favoriteObj,
-      ...localStoreFav,
-    ]);
-    return localStorage.setItem('favoriteRecipes', newRecipeStringfy);
   };
+
+  if (!detailsDrink[0]) return <h1>Loading...</h1>;
 
   return (
     <button onClick={ favoriteFunc } type="button">
       <img
-        data-testid="favorite-btn"
+        data-testid={ testId }
         src={ favorite ? blackHeartIcon : whiteHeartIcon }
         alt="heart"
       />
@@ -72,6 +76,12 @@ function FavoriteButtonDrink({ id, fetchAgain }) {
 FavoriteButtonDrink.propTypes = {
   id: PropTypes.string.isRequired,
   fetchAgain: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
+  setTrue: PropTypes.func,
+};
+
+FavoriteButtonDrink.defaultProps = {
+  setTrue: PropTypes.undefined,
 };
 
 export default FavoriteButtonDrink;
