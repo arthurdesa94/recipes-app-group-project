@@ -62,8 +62,9 @@ function CategoryBar({ type }) {
 
   // prettier-ignore
   return (
-    <div>
+    <div className="flex justify-center flex-wrap items-center w-11/12">
       <button
+        className="transform hover:scale-110 transition-all font-pacifico border-b-2 ml-4 rounded-full focus:outline-none text-xl text-white"
         type="button"
         data-testid="All-category-filter"
         onClick={ handleAll }
@@ -73,6 +74,7 @@ function CategoryBar({ type }) {
       {response.map(
         (element, index) => index < five && (
           <button
+            className="transform hover:scale-110 transition-all font-pacifico border-b-2 ml-4 rounded-full focus:outline-none text-xl text-white"
             key={ element.strCategory }
             type="button"
             data-testid={ `${element.strCategory}-category-filter` }

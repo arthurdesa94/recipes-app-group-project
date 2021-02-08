@@ -5,12 +5,21 @@
 
 @layer components {
   .blur {
-    backdrop-filter: blur(3px)
+    backdrop-filter: blur(3px);
   }
   .text-shadow {
-    text-shadow: 5px 1px 7px black
+    text-shadow: 5px 1px 7px black;
   }
   .font-pacifico {
     font-family: 'Pacifico', cursive;
+  }
+  .link {
+    @apply text-white hover:text-white hover:no-underline;
+  }
+}
+
+@layer base {
+  a {
+    @apply font-pacifico text-white;
   }
 }

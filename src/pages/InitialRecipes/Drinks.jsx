@@ -18,14 +18,17 @@ function Drinks({ location }) {
   }, [dispatch, setterIngredient]);
 
   return (
-    <div>
-      <div className="bg-gradient-to-r from-green-100 to-green-300 blur bg-opacity-40 rounded-b-2xl shadow-sm">
-        <Header title="Bebidas" />
-        {searchBarView && <SearchBar location={ location.pathname } />}
+    <div className="h-screen overflow-y-scroll max-h-screen w-screen min-h-screen bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">
+      <div className="h-auto flex flex-column items-center mx-auto justify-center w-11/12">
+        <div className="blur bg-clip-ppading border-b-4 border-t-4 m-4 w-10/12 border-white shadow-xl rounded-xl p-4 mx-auto">
+          <Header title="Bebidas" />
+          {searchBarView && <SearchBar location={ location.pathname } />}
+        </div>
+        <CategoryBar type="drinks" />
+        <RecipeDrinkCard />
+        <MenuInferior />
       </div>
-      <CategoryBar type="drinks" />
-      <RecipeDrinkCard />
-      <MenuInferior />
+      <div className="h-auto w-screen bg-gradient-to-r from-green-300 to-green-500" />
     </div>
   );
 }
