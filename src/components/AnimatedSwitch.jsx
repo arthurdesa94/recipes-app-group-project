@@ -18,56 +18,61 @@ import Profile from '../pages/Profile';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoritesRecipes from '../pages/FavoritesRecipes';
 
-const AnimatedSwitch = withRouter(({ location }) => {
-  return (
-    <TransitionGroup>
-      <CSSTransition key={ location.key } mountOnEnter unmountOnExit timeout={ 1000 } classNames="example">
-        <Switch location={ location }>
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/comidas" component={ Foods } />
-          <Route exact path="/bebidas" component={ Drinks } />
-          <Route exact path="/comidas/:id" component={ FoodsDetails } />
-          <Route exact path="/bebidas/:id" component={ DrinksDetails } />
-          <Route
-            exact
-            path="/comidas/:id/in-progress"
-            component={ FoodRecipeProgress }
-          />
-          <Route
-            exact
-            path="/bebidas/:id/in-progress"
-            component={ DrinkRecipeProgress }
-          />
-          <Route exact path="/explorar" component={ Explore } />
-          <Route exact path="/explorar/comidas" component={ ExploreFoods } />
-          <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
-          <Route
-            exact
-            path="/explorar/comidas/ingredientes"
-            component={ ExploreFoodsIngredients }
-          />
-          <Route
-            exact
-            path="/explorar/bebidas/ingredientes"
-            component={ ExploreDrinksIngredients }
-          />
-          <Route
-            exact
-            path="/explorar/comidas/area"
-            component={ ExploreFoodsArea }
-          />
-          <Route exact path="/perfil" component={ Profile } />
-          <Route exact path="/receitas-feitas" component={ DoneRecipes } />
-          <Route
-            exact
-            path="/receitas-favoritas"
-            component={ FavoritesRecipes }
-          />
-          <Route component={ () => <div>Not Found</div> } />
-        </Switch>
-      </CSSTransition>
-    </TransitionGroup>
-  );
-});
+const AnimatedSwitch = withRouter(({ location }) => (
+  <TransitionGroup>
+    <CSSTransition
+      key={ location.key }
+      mountOnEnter
+      unmountOnExit
+      in
+      timeout={ 300 }
+      classNames="example"
+    >
+      <Switch location={ location }>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/comidas" component={ Foods } />
+        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas/:id" component={ FoodsDetails } />
+        <Route exact path="/bebidas/:id" component={ DrinksDetails } />
+        <Route
+          exact
+          path="/comidas/:id/in-progress"
+          component={ FoodRecipeProgress }
+        />
+        <Route
+          exact
+          path="/bebidas/:id/in-progress"
+          component={ DrinkRecipeProgress }
+        />
+        <Route exact path="/explorar" component={ Explore } />
+        <Route exact path="/explorar/comidas" component={ ExploreFoods } />
+        <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ ExploreFoodsIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ ExploreDrinksIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/comidas/area"
+          component={ ExploreFoodsArea }
+        />
+        <Route exact path="/perfil" component={ Profile } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipes } />
+        <Route
+          exact
+          path="/receitas-favoritas"
+          component={ FavoritesRecipes }
+        />
+        <Route component={ () => <div>Not Found</div> } />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
+));
 
 export default AnimatedSwitch;

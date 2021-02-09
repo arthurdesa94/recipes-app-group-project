@@ -79,58 +79,84 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
-      <Header title="Receitas Favoritas" search={ false } />
-      <div>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => handleFilter('all') }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          onClick={ () => handleFilter('bebida') }
-        >
-          Drinks
-        </button>
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          onClick={ () => handleFilter('comida') }
-        >
-          Food
-        </button>
-      </div>
+    <div className="main-container font-pacifico text-white bg-gradient-to-tr from-pink-400 to-pink-500">
+      <div className="items-container">
+        <div className="header-container">
+          <Header title="Receitas Favoritas" search={ false } />
+        </div>
 
-      <div>
-        {getRecipes.map((element, index) => (
-          <div key={ element.id }>
-            <Link to={ `/${element.type}s/${element.id}` }>
-              <img
-                className="recommendation-image"
-                src={ element.image }
-                alt="teste"
-                data-testid={ `${index}-horizontal-image` }
+        <div className="font-pacifico text-pink-500 flex w-4/5 flex-row justify-around">
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => handleFilter('all') }
+          >
+            All
+          </button>
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => handleFilter('bebida') }
+          >
+            Drinks
+          </button>
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ () => handleFilter('comida') }
+          >
+            Food
+          </button>
+        </div>
+
+        <div className="flex flex-col justify-center items-center">
+          {getRecipes.map((element, index) => (
+            <div
+              className="rounded-xl text-center mt-2 font-pacifico text-pink-500 bg-white p-3 shadow-xl border-t-2 border-b-2 border-pink-600 my-4 "
+              key={ element.id }
+            >
+              <Link
+                className="link text-pink-500 hover:text-pink-500"
+                to={ `/${element.type}s/${element.id}` }
+              >
+                <img
+                  className="rounded-xl shadow-xl"
+                  src={ element.image }
+                  alt="teste"
+                  data-testid={ `${index}-horizontal-image` }
+                />
+              </Link>
+              <h1
+                className="text-4xl mt-2"
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {element.name}
+              </h1>
+              <h1
+                className="text-2xl mt-2"
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                {getAreaOrAlcoholic(
+                  element.type,
+                  element.category,
+                  element.area,
+                  element.alcoholicOrNot,
+                )}
+              </h1>
+              <Link
+                className="link text-pink-500 hover:text-pink-500"
+                to={ `/${element.type}s/${element.id}` }
               />
-            </Link>
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              {getAreaOrAlcoholic(
-                element.type,
-                element.category,
-                element.area,
-                element.alcoholicOrNot,
-              )}
-            </p>
-            <Link to={ `/${element.type}s/${element.id}` }>
-              <p data-testid={ `${index}-horizontal-name` }>{element.name}</p>
-            </Link>
-            {getCopyButton(element.type, element.id, index)}
-            {getFavoriteButton(element.type, element.id, index)}
-          </div>
-        ))}
+              <div className="flex w-1/2 mx-auto justify-around items-baseline">
+                {getCopyButton(element.type, element.id, index)}
+                {getFavoriteButton(element.type, element.id, index)}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

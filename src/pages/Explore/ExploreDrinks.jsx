@@ -14,24 +14,30 @@ function ExploreDrinks(props) {
   };
 
   return (
-    <div>
-      <Header title="Explorar Bebidas" search={ false } />
+    <div className="main-container bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">
+      <div className="items-container">
+        <div className="header-container">
+          <Header title="Explorar Bebidas" search={ false } />
+        </div>
 
-      <Link
-        to="/explorar/bebidas/ingredientes"
-        data-testid="explore-by-ingredient"
-      >
-        Por Ingredientes
-      </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
+        <Link
+          className="explore-link"
+          to="/explorar/bebidas/ingredientes"
+          data-testid="explore-by-ingredient"
+        >
+          Por Ingredientes
+        </Link>
+        <button
+          className="explore-link font-pacifico"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </button>
 
-      <MenuInferior />
+        <MenuInferior />
+      </div>
     </div>
   );
 }

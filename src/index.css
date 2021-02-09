@@ -16,6 +16,21 @@
   .link {
     @apply text-white hover:text-white hover:no-underline;
   }
+  .main-container {
+    @apply h-screen overflow-y-scroll w-screen min-h-screen;
+  }
+  .items-container {
+    @apply h-auto flex flex-col items-center mx-auto justify-center w-11/12;
+  }
+  .header-container {
+    @apply blur bg-clip-padding border-b-4 border-t-4 m-4 w-10/12 border-white shadow-xl rounded-lg p-4 mx-auto;
+  }
+  .explore-link {
+    @apply transform transition-all hover:scale-110 link text-4xl m-2 border-b-2 border-white rounded-lg;
+  }
+  .min-width {
+    min-width: 46%
+  }
 }
 
 @layer base {

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -13,13 +15,14 @@ function CopyButton({ location, testId }) {
   };
 
   return (
-    <div>
+    <div className="flex m-2 flex-col">
       <button
+        className="focus:outline-none"
         onMouseLeave={ () => setCopyLink(false) }
         onClick={ onClickCopy }
         type="button"
       >
-        <img src={ shareIcon } alt="share-btn" data-testid={ testId } />
+        <FontAwesomeIcon size="2x" className="transform hover:scale-105" icon={ faShareAlt } />
       </button>
       {copyLink && <p>Link copiado!</p>}
     </div>

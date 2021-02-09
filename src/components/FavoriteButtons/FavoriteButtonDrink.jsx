@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import * as Actions from '../../actions/index';
@@ -63,12 +66,8 @@ function FavoriteButtonDrink({ id, fetchAgain, testId, setTrue }) {
   if (!detailsDrink[0]) return <h1>Loading...</h1>;
 
   return (
-    <button onClick={ favoriteFunc } type="button">
-      <img
-        data-testid={ testId }
-        src={ favorite ? blackHeartIcon : whiteHeartIcon }
-        alt="heart"
-      />
+    <button className="focus:outline-none" onClick={ favoriteFunc } type="button">
+      {favorite ? <FontAwesomeIcon className="transform hover:scale-105" size="2x" icon={ faHeart } /> : <FontAwesomeIcon className="transform hover:scale-105" size="2x" icon={ faRegularHeart } /> }
     </button>
   );
 }

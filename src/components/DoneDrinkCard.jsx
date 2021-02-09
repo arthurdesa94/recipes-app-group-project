@@ -16,10 +16,10 @@ function DoneDrinkCard({ drink, index }) {
     doneDate,
   } = drink;
   return (
-    <div>
-      <Link to={ `/bebidas/${id}` }>
+    <div className=" rounded-xl font-pacifico text-green-500 bg-white p-3 shadow-xl border-t-2 border-b-2 border-green-500 my-4 flex flex-col justify-center items-center">
+      <Link className="link text-green-500 hover:text-green-500" to={ `/bebidas/${id}` }>
         <img
-          className="recommendation-image"
+          className="shadow-xl rounded-xl"
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="recipeImg"
@@ -30,18 +30,18 @@ function DoneDrinkCard({ drink, index }) {
         location={ `/bebidas/${id}` }
         testId={ `${index}-horizontal-share-btn` }
       />
-      <Link to={ `/bebidas/${id}` }>
+      <Link className="link text-green-500 hover:text-green-500" to={ `/bebidas/${id}` }>
         <h1
           data-testid={ `${index}-horizontal-name` }
         >
           {`${name}: ${alcoholicOrNot}`}
         </h1>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
+      <p className="text-2xl"data-testid={ `${index}-horizontal-top-text` }>
         {`Categoria: ${category} ${alcoholicOrNot}`}
       </p>
-      <p>{`Area: ${area !== undefined ? area : 'desconhecida'}`}</p>
-      <p data-testid={ `${index}-horizontal-done-date` }>
+      <p className="text-2xl">{`Area: ${!area ? 'desconhecida' : 'area'}`}</p>
+      <p className="text-2xl" data-testid={ `${index}-horizontal-done-date` }>
         {`Feita em: ${doneDate}`}
       </p>
       {tags

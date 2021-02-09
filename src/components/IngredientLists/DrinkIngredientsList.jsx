@@ -56,6 +56,7 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
     if (filterProgress) {
       return (
         <input
+          className="border-transparent rounded-full w-5 h-5"
           type="checkbox"
           name={ element }
           id={ element }
@@ -66,6 +67,7 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
     }
     return (
       <input
+        className="rounded-full w-5 h-5"
         type="checkbox"
         name={ element }
         id={ element }
@@ -79,7 +81,7 @@ function DrinkIngredientsList({ progressRecipes, id, setCheck, getCheck }) {
       {progressRecipes.map((element, index) => (
         <li data-testid={ `${index}-ingredient-step` } key={ element }>
           {returnCheckbox(element)}
-          <label htmlFor={ element }>{element}</label>
+          <label className="text-2xl" htmlFor={ element }>{element}</label>
         </li>
       ))}
     </ul>

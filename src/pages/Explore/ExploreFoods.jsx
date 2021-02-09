@@ -14,27 +14,36 @@ function ExploreFoods(props) {
   };
 
   return (
-    <div>
-      <Header title="Explorar Comidas" search={ false } />
+    <div className="main-container bg-gradient-to-tr from-amber-300 to-amber-400">
+      <div className="items-container">
+        <div className="header-container">
+          <Header title="Explorar Comidas" search={ false } />
+        </div>
+        <Link
+          className="explore-link"
+          to="/explorar/comidas/ingredientes"
+          data-testid="explore-by-ingredient"
+        >
+          Por Ingredientes
+        </Link>
+        <Link
+          className="explore-link"
+          to="/explorar/comidas/area"
+          data-testid="explore-by-area"
+        >
+          Por Local de Origem
+        </Link>
+        <button
+          className="explore-link font-pacifico"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </button>
 
-      <Link
-        to="/explorar/comidas/ingredientes"
-        data-testid="explore-by-ingredient"
-      >
-        Por Ingredientes
-      </Link>
-      <Link to="/explorar/comidas/area" data-testid="explore-by-area">
-        Por Local de Origem
-      </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
-
-      <MenuInferior />
+        <MenuInferior />
+      </div>
     </div>
   );
 }

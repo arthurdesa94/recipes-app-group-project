@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../../actions';
 
@@ -42,18 +44,18 @@ function DoneRecipeButtonDrink({ history, id, progressRecipes }) {
 
   const buttonEnabled = () => (
     <button type="button" data-testid="finish-recipe-btn" onClick={ handleClick }>
-      Finalizar Receita
+      <FontAwesomeIcon size="4x" className="transform relative transition-all hover:scale-110  -top-2 fill-current text-green-400" icon={ faCheckCircle } />
     </button>
   );
 
   const buttonDisabled = () => (
     <button type="button" data-testid="finish-recipe-btn" disabled>
-      Finalizar Receita
+      <FontAwesomeIcon size="4x" className="transform relative transition-all -top-2 fill-current text-green-100" icon={ faCheckCircle } />
     </button>
   );
 
   return (
-    <div>{verifyLengthChecked() ? buttonEnabled() : buttonDisabled()}</div>
+    <div className="footer w-screen bg-white p-2 flex items-center justify-center h-10 border-t-2 shadow-inner">{verifyLengthChecked() ? buttonEnabled() : buttonDisabled()}</div>
   );
 }
 

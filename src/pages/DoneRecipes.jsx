@@ -43,32 +43,40 @@ function DoneRecipes() {
     return setFilter('Loading');
   }
   return (
-    <div>
-      <Header title="Receitas Feitas" search={ false } />
-      <div>
-        <button
-          type="button"
-          onClick={ () => setFilter('All') }
-          data-testid="filter-by-all-btn"
-        >
-          All
-        </button>
-        <button
-          type="button"
-          onClick={ () => setFilter('Drink') }
-          data-testid="filter-by-drink-btn"
-        >
-          Drink
-        </button>
-        <button
-          type="button"
-          onClick={ () => setFilter('Food') }
-          data-testid="filter-by-food-btn"
-        >
-          Food
-        </button>
+    <div className="main-container bg-gradient-to-tr from-green-300 to-green-400">
+      <div className="items-container">
+        <div className="header-container">
+          <Header title="Receitas Feitas" search={ false } />
+        </div>
+
+        <div className="font-pacifico text-green-500 flex w-4/5 flex-row justify-around">
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            onClick={ () => setFilter('All') }
+            data-testid="filter-by-all-btn"
+          >
+            All
+          </button>
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            onClick={ () => setFilter('Drink') }
+            data-testid="filter-by-drink-btn"
+          >
+            Drink
+          </button>
+          <button
+            className="transform hover:scale-105 transition-all focus:outline-none bg-white m-2 h-10 rounded-xl shadow-xl w-1/3"
+            type="button"
+            onClick={ () => setFilter('Food') }
+            data-testid="filter-by-food-btn"
+          >
+            Food
+          </button>
+        </div>
+        {retrieveRecipes()}
       </div>
-      {retrieveRecipes()}
     </div>
   );
 }

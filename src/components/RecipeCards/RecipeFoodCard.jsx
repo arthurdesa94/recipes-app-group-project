@@ -36,7 +36,7 @@ function RecipeFoodCard() {
       return recipes.map(({ strMeal, idMeal, strMealThumb }, index) => {
         if (index <= maxListSize) {
           return (
-            <div className="w-2/5 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 p-4 m-4 border-t-4 rounded-xl border-amber-500 shadow-2xl">
+            <div className="w-2/5 bg-white h-auto flex flex-col justify-center items-center transform hover:scale-105 transition-all border-b-4 p-4 m-4 border-t-4 rounded-xl border-amber-500 shadow-2xl">
               <Link className="link text-amber-500 hover:text-amber-500" to={ `/comidas/${idMeal}` } key={ idMeal }>
                 <div data-testid={ `${index}-recipe-card` }>
                   <img

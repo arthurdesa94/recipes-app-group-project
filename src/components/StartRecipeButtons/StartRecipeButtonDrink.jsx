@@ -1,24 +1,32 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlayCircle,
+  faCheckCircle,
+  faTasks,
+} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 function StartRecipeButtonDrink({ id, ingredients }) {
   const buttonContinue = () => (
-    <Link
-      className="footer"
-      to={ `/bebidas/${id}/in-progress` }
-      data-testid="start-recipe-btn"
-    >
-      Continuar Receita
-    </Link>
+    <div className="">
+      <Link
+        className="link"
+        to={ `/bebidas/${id}/in-progress` }
+        data-testid="start-recipe-btn"
+      >
+        <FontAwesomeIcon className="relative fill-current -top-2 text-amber-600 transform hover:scale-105 transition-all" icon={ faTasks } size="4x" />
+      </Link>
+    </div>
   );
   const buttonInitial = () => (
     <Link
-      className="footer"
+      className="link"
       to={ `/bebidas/${id}/in-progress` }
       data-testid="start-recipe-btn"
     >
-      Iniciar receita
+      <FontAwesomeIcon className="relative fill-current -top-2 text-lightBlue-600 transform hover:scale-105 transition-all" icon={ faPlayCircle } size="4x" />
     </Link>
   );
   const verifyDoneRecipe = () => {
@@ -28,16 +36,19 @@ function StartRecipeButtonDrink({ id, ingredients }) {
     ) || { cocktails: '' };
     const idDrink = progressStorage.cocktails[id];
     if (idDrink && idDrink.length === totalLength) {
-      return <h1 className="footer">Parabéns, você já realizou esta receita!</h1>;
-    } if (
-      !progressStorage.cocktails[id]
-    ) {
+      return <FontAwesomeIcon className="relative -top-2 fill-current text-green-400 transform hover:scale-105 transition-all" icon={ faCheckCircle } size="4x" />;
+    }
+    if (!progressStorage.cocktails[id]) {
       return buttonInitial();
     }
     return buttonContinue();
   };
 
-  return <div>{verifyDoneRecipe()}</div>;
+  return (
+    <div className="footer w-screen bg-white p-2 flex items-center justify-center h-10 border-t-2 shadow-inner">
+      {verifyDoneRecipe()}
+    </div>
+  );
 }
 
 StartRecipeButtonDrink.propTypes = {

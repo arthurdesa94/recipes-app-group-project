@@ -10,7 +10,7 @@ function MenuInferior() {
   return (
     <footer
       data-testid="footer"
-      className="footer blur h-auto w-screen bg-clip-ppading flex justify-around border-b-4 border-t-4 border-white shadow-xl rounded-lg"
+      className="footer p-2 blur h-auto w-screen bg-clip-ppading flex justify-around border-b-4 border-t-4 border-white shadow-xl rounded-lg"
     >
       <Link className="link bg-white rounded-full text-lightBlue-500 transform hover:scale-110 hover:text-lightBlue-600 transition-all" to="/bebidas">
         <FontAwesomeIcon icon={ faCocktail } size="3x" />

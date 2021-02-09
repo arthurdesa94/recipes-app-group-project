@@ -43,37 +43,56 @@ function ExploreFoodsArea() {
   }, [state.dropdown]);
 
   return (
-    <div>
-      <Header title="Explorar Origem" />
-      <select
-        data-testid="explore-by-area-dropdown"
-        value={ state.dropdown }
-        onChange={ handleChange }
-      >
-        <option data-testid="All-option">All</option>
-        {data.map(({ strArea }) => (
-          <option key={ strArea } data-testid={ `${strArea}-option` }>
-            {strArea}
-          </option>
-        ))}
-      </select>
-      <div>
-        {cards.map(
-          ({ strMeal, strMealThumb, idMeal }, index) => index < maxCards && (
-            <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
-              <div data-testid={ `${index}-recipe-card` }>
-                <img
-                  src={ strMealThumb }
-                  alt="meal-img"
-                  data-testid={ `${index}-card-img` }
-                />
-                <p data-testid={ `${index}-card-name` }>{strMeal}</p>
+    <div className="main-container bg-gradient-to-tr from-amber-400 to-amber-500">
+      <div className="items-container">
+        <div className="header-container">
+          <Header title="Explorar Origem" />
+        </div>
+
+        <select
+          className="bg-white font-pacifico focus:outline-none text-2xl border-b-2 border-t-2 text-amber-600 border-amber-600 rounded-lg w-11/12"
+          data-testid="explore-by-area-dropdown"
+          value={ state.dropdown }
+          onChange={ handleChange }
+        >
+          <option className="bg-white" data-testid="All-option">All</option>
+          {data.map(({ strArea }) => (
+            <option key={ strArea } data-testid={ `${strArea}-option` }>
+              {strArea}
+            </option>
+          ))}
+        </select>
+        <div className="w-screen h-auto flex-wrap justify-center items-center flex flex-row">
+          {cards.map(
+            ({ strMeal, strMealThumb, idMeal }, index) => index < maxCards && (
+              <div
+                className="w-2/5 bg-white h-auto flex flex-col justify-center items-center transform hover:scale-105 transition-all border-b-4 p-4 m-4 border-t-4 rounded-xl border-amber-600 shadow-2xl"
+                data-testid={ `${index}-recipe-card` }
+              >
+                <Link
+                  class="link text-amber-600 hover:text-amber-600"
+                  to={ `/comidas/${idMeal}` }
+                  key={ idMeal }
+                >
+                  <img
+                    className="w-11/12 mx-auto shadow-xl bg-white rounded-xl"
+                    src={ strMealThumb }
+                    alt="meal-img"
+                    data-testid={ `${index}-card-img` }
+                  />
+                  <p
+                    className="text-center w-auto h-auto text-3xl m-4"
+                    data-testid={ `${index}-card-name` }
+                  >
+                    {strMeal}
+                  </p>
+                </Link>
               </div>
-            </Link>
-          ),
-        )}
+            ),
+          )}
+        </div>
+        <MenuInferior />
       </div>
-      <MenuInferior />
     </div>
   );
 }
