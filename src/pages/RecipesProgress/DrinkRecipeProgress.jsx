@@ -63,7 +63,7 @@ function DrinkRecipeProgress({ match, history }) {
     handleStorage();
   }, [id, progressRecipes]);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading bgColor="from-lightBlue-300 to-lightBlue-400" />;
 
   return (
     <div className="main-container font-pacifico text-white bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">

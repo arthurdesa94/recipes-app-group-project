@@ -18,9 +18,9 @@ function Drinks({ location }) {
   }, [dispatch, setterIngredient]);
 
   return (
-    <div className="h-screen overflow-y-scroll max-h-screen w-screen min-h-screen bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">
-      <div className="h-auto flex flex-column items-center mx-auto justify-center w-11/12">
-        <div className="blur bg-clip-ppading border-b-4 border-t-4 m-4 w-10/12 border-white shadow-xl rounded-xl p-4 mx-auto">
+    <div className="h-screen max-h-screen w-screen min-h-screen bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">
+      <div className="h-screen flex flex-column items-center mx-auto justify-center w-11/12">
+        <div className="blur bg-clip-padding border-b-4 border-t-4 m-4 w-10/12 border-white shadow-xl rounded-xl p-4 mx-auto">
           <Header title="Bebidas" />
           {searchBarView && <SearchBar location={ location.pathname } />}
         </div>

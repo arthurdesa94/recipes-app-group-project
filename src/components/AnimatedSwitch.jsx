@@ -19,13 +19,12 @@ import DoneRecipes from '../pages/DoneRecipes';
 import FavoritesRecipes from '../pages/FavoritesRecipes';
 
 const AnimatedSwitch = withRouter(({ location }) => (
-  <TransitionGroup>
+  <TransitionGroup appear childFactory={ (child) => React.cloneElement(child) } component={ null }>
     <CSSTransition
-      key={ location.key }
-      mountOnEnter
+      key={ location.pathname.split('/') || '/' }
+      appear
       unmountOnExit
-      in
-      timeout={ 300 }
+      timeout={ 500 }
       classNames="example"
     >
       <Switch location={ location }>

@@ -25,7 +25,7 @@ function Header({ title, search }) {
 
   return (
     <div className="transition-all duration-500">
-      <header className="h-auto w-auto flex justify-around items-baseline">
+      <header className="h-auto w-auto flex justify-around mx-auto text-center items-baseline">
         <Link to="/perfil">
           <FontAwesomeIcon
             size="3x"

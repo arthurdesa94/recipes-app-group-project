@@ -64,6 +64,7 @@ input:checked + label {
   transition: all 400ms ease-in-out;
 }
 .example-enter {
+  position: absolute;
   transform: translateX(100%)
 }
 
@@ -73,22 +74,22 @@ input:checked + label {
 }
 
 .example-exit {
+  position: absolute;
+  overflow: hidden;
   transform: translateX(0%);
-  transform: translateY(-100%);
 }
 
 .example-exit-active {
-  position: absolute;
-  transform: translateY(-100%);
   transform: translateX(-100%);
-  transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in;
 }
 
 .example-appear {
-  transform: translateX(100%)
+  position: absolute;
+  transform: translateX(-100%);
 }
 
 .example-appear-active {
   transform: translateX(0);
-  transition: all 300ms ease-in-out;
+  transition: all 200ms ease-in;
 }

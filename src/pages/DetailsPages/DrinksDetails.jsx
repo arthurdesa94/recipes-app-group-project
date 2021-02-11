@@ -57,7 +57,7 @@ function DrinksDetails({ match, location }) {
     horizontalMakerFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
-  if (loading || !detailsDrink) return <Loading />;
+  if (loading || !detailsDrink) return <Loading bgColor="from-lightBlue-200 to-lightBlue-400" />;
   return (
     <div className="text-center w-screen font-pacifico text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-lightBlue-300 to-lightBlue-400">
       {detailsDrink.map(
@@ -69,7 +69,7 @@ function DrinksDetails({ match, location }) {
           strInstructions,
         }) => (
           <div
-            className="flex flex-col items-center justify-center w-11/12 mx-auto h-10/12"
+            className="flex overscroll-y-auto flex-col items-center justify-center w-11/12 mx-auto h-10/12"
             key={ strDrink }
           >
             <h1 className="header-container" data-testid="recipe-title">
@@ -100,11 +100,18 @@ function DrinksDetails({ match, location }) {
               ))}
             </ul>
             <div className="flex flex-col bg-white rounded-xl shadow-xl">
-              <button className="bg-white p-2 rounded-xl text-lightBlue-500 focus:outline-none text-3xl" type="button" onClick={ setInstructions }>
+              <button
+                className="bg-white p-2 rounded-xl text-lightBlue-500 focus:outline-none text-3xl"
+                type="button"
+                onClick={ setInstructions }
+              >
                 Instruções
               </button>
               {instructionsShow && (
-                <p className="bg-white rounded-xl p-2 text-lightBlue-500" data-testid="instructions">
+                <p
+                  className="bg-white rounded-xl p-2 text-lightBlue-500"
+                  data-testid="instructions"
+                >
                   {strInstructions}
                 </p>
               )}
@@ -128,13 +135,11 @@ function DrinksDetails({ match, location }) {
                 </div>
               ))}
             </div>
-            <StartRecipeButtonDrink
-              id={ id }
-              ingredients={ retrieveIngredients() }
-            />
           </div>
         ),
       )}
+      <StartRecipeButtonDrink id={ id } ingredients={ retrieveIngredients } />
+      ,
     </div>
   );
 }

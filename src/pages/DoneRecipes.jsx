@@ -43,7 +43,7 @@ function DoneRecipes() {
     return setFilter('Loading');
   }
   return (
-    <div className="main-container bg-gradient-to-tr from-green-300 to-green-400">
+    <div className="main-container bg-gradient-to-tr h-screen from-green-300 to-green-400">
       <div className="items-container">
         <div className="header-container">
           <Header title="Receitas Feitas" search={ false } />
@@ -75,7 +75,7 @@ function DoneRecipes() {
             Food
           </button>
         </div>
-        {retrieveRecipes()}
+        <div className="max-h-96 my-auto sm:overflow-visible mx-auto overflow-y-scroll rounded-xl">{retrieveRecipes()}</div>
       </div>
     </div>
   );
