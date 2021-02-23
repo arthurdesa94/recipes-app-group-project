@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 import * as Actions from '../../actions';
 import * as drinkAPI from '../../services/drinkApi';
 import FavoriteButtonFood from '../../components/FavoriteButtons/FavoriteButtonFood';
@@ -9,6 +10,7 @@ import StartRecipeButtonFood from '../../components/StartRecipeButtons/StartReci
 
 function FoodsDetails({ match, location }) {
   const [instructionsShow, setShow] = useState(false);
+  const [ingredientsShow, setIng] = useState(false);
   const [response, setResponse] = useState([]);
   const [recommendation, setRecommedation] = useState([]);
 
@@ -45,6 +47,8 @@ function FoodsDetails({ match, location }) {
   };
 
   const setInstructions = () => (instructionsShow ? setShow(false) : setShow(true));
+
+  const setIngredients = () => (ingredientsShow ? setIng(false) : setIng(true));
 
   useEffect(() => {
     dispatch(Actions.retrieveFoodDetailsById(id));
@@ -86,20 +90,31 @@ function FoodsDetails({ match, location }) {
               <FavoriteButtonFood id={ id } />
             </div>
             <p data-testid="recipe-category">{`Categoria: ${strCategory}`}</p>
-            <h4>Ingredientes</h4>
-            <ul>
-              {retrieveIngredients().map((ingredients, index) => (
-                <li
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                  key={ ingredients }
-                >
-                  {ingredients}
-                </li>
-              ))}
-            </ul>
+            <div className="bg-white rounded-lg mb-2 flex flex-col justify-center items-center">
+              <button
+                type="button"
+                onClick={ setIngredients }
+                className="bg-white text-2xl text-center focus:outline-none rounded-lg p-2 text-amber-500"
+              >
+                Ingredientes
+              </button>
+              {ingredientsShow && (
+                <ul className="bg-white rounded-lg p-2">
+                  {retrieveIngredients().map((ingredients, index) => (
+                    <li
+                      className="border-t-2 border-b-2 border-amber-300 m-2 p-2 rounded-lg text-amber-500"
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                      key={ ingredients }
+                    >
+                      {ingredients}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <div className="flex flex-col bg-white rounded-xl shadow-xl">
               <button
-                className="bg-white p-2 rounded-xl text-amber-500 focus:outline-none text-3xl"
+                className="bg-white p-2 rounded-lg text-amber-500 focus:outline-none text-2xl"
                 type="button"
                 onClick={ setInstructions }
               >
@@ -107,7 +122,7 @@ function FoodsDetails({ match, location }) {
               </button>
               {instructionsShow && (
                 <p
-                  className="bg-white rounded-xl p-2 text-amber-500"
+                  className="bg-white rounded-lg p-2 text-amber-500"
                   data-testid="instructions"
                 >
                   {strInstructions}
