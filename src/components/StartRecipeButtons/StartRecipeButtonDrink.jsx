@@ -30,12 +30,14 @@ function StartRecipeButtonDrink({ id, ingredients }) {
     </Link>
   );
   const verifyDoneRecipe = () => {
-    const totalLength = ingredients.length;
+    const doneStorage = JSON.parse(
+      localStorage.getItem('doneRecipes'),
+    ) || [{ 0: { id: '' } }];
+    const doneStorageConfirmed = doneStorage.some((element) => element.id === id);
     const progressStorage = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     ) || { cocktails: '' };
-    const idDrink = progressStorage.cocktails[id];
-    if (idDrink && idDrink.length === totalLength) {
+    if (doneStorageConfirmed) {
       return <FontAwesomeIcon className="relative -top-2 fill-current text-green-400 transform hover:scale-105 transition-all" icon={ faCheckCircle } size="4x" />;
     }
     if (!progressStorage.cocktails[id]) {

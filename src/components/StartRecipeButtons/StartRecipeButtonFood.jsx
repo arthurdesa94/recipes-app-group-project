@@ -1,34 +1,44 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlayCircle,
+  faCheckCircle,
+  faTasks,
+} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 function StartRecipeButtonFood({ id, ingredients }) {
   const buttonContinue = () => (
-    <Link
-      className="footer"
-      to={ `/comidas/${id}/in-progress` }
-      data-testid="start-recipe-btn"
-    >
-      Continuar Receita
-    </Link>
+    <div className="">
+      <Link
+        className="link"
+        to={ `/comidas/${id}/in-progress` }
+        data-testid="start-recipe-btn"
+      >
+        <FontAwesomeIcon className="relative fill-current -top-2 text-amber-600 transform hover:scale-105 transition-all" icon={ faTasks } size="4x" />
+      </Link>
+    </div>
   );
   const buttonInitial = () => (
     <Link
-      className="footer"
+      className="link"
       to={ `/comidas/${id}/in-progress` }
       data-testid="start-recipe-btn"
     >
-      Iniciar receita
+      <FontAwesomeIcon className="relative fill-current -top-2 text-lightBlue-600 transform hover:scale-105 transition-all" icon={ faPlayCircle } size="4x" />
     </Link>
   );
   const verifyDoneRecipe = () => {
-    const totalLength = ingredients.length;
+    const doneStorage = JSON.parse(
+      localStorage.getItem('doneRecipes'),
+    ) || [{ 0: { id: '' } }];
+    const doneStorageConfirmed = doneStorage.some((element) => element.id === id);
     const progressStorage = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     ) || { meals: '' };
-    const idMeal = progressStorage.meals[id];
-    if (idMeal && idMeal.length === totalLength) {
-      return <h1 className="footer">Parabéns, você já realizou esta receita!</h1>;
+    if (doneStorageConfirmed) {
+      return <FontAwesomeIcon className="relative -top-2 fill-current text-green-400 transform hover:scale-105 transition-all" icon={ faCheckCircle } size="4x" />;
     } if (
       !progressStorage.meals[id]
     ) {
@@ -37,7 +47,7 @@ function StartRecipeButtonFood({ id, ingredients }) {
     return buttonContinue();
   };
 
-  return <div>{verifyDoneRecipe()}</div>;
+  return <div className="footer w-screen bg-white p-2 flex items-center justify-center h-10 border-t-2 shadow-inner">{verifyDoneRecipe()}</div>;
 }
 
 StartRecipeButtonFood.propTypes = {
