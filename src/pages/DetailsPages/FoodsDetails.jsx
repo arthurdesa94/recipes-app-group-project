@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
+import Loading from '../../components/Loading';
 import * as Actions from '../../actions';
 import * as drinkAPI from '../../services/drinkApi';
 import FavoriteButtonFood from '../../components/FavoriteButtons/FavoriteButtonFood';
@@ -61,7 +61,7 @@ function FoodsDetails({ match, location }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading bgColor="from-amber-300 to-amber-400" />;
   return (
     <div className="text-center w-screen flex justify-center font-montserrat lg:h-screen text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-amber-400 to-amber-500">
       {details.map(

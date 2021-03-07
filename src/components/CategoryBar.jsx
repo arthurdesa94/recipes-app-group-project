@@ -66,7 +66,7 @@ function CategoryBar({ type }) {
       <div
         className={ `transform hover:scale-110 break-normal 
         transition-all h-auto w-auto font-monteserrat rounded-lg 
-        border-b-2 ml-4 ${type === 'drinks' ? 'text-lightBlue-300' : 'text-amber-300'}` }
+        border-b-2 ml-4 ${type === 'drinks' ? 'text-blue-400' : 'text-amber-300'}` }
       >
         <button
           className="focus:outline-none w-20 h-4 font-bold"
@@ -83,7 +83,7 @@ function CategoryBar({ type }) {
           <div
             className={ `transform hover:scale-110 break-normal 
           transition-all h-auto w-auto font-monteserrat rounded-lg 
-          border-b-2 ml-4 ${type === 'drinks' ? 'text-lightBlue-300' : 'text-amber-300'}` }
+          border-b-2 ml-4 ${type === 'drinks' ? 'text-blue-400' : 'text-amber-300'}` }
           >
             <button
               className="focus:outline-none w-36 h-4 font-bold"

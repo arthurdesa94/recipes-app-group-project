@@ -46,7 +46,7 @@ function DrinkRecipeProgress({ match, history }) {
     const handleStorage = () => {
       const progressStorage = JSON
         .parse(localStorage
-          .getItem('inProgressRecipes')) || { cocktails: '', meals: '' };
+          .getItem('inProgressRecipes')) || { cocktails: '', Drinks: '' };
       if (progressRecipes.length !== emptySize && !progressStorage.cocktails[id]) {
         localStorage.setItem(
           'inProgressRecipes',
@@ -66,51 +66,59 @@ function DrinkRecipeProgress({ match, history }) {
   if (loading) return <Loading bgColor="from-lightBlue-300 to-lightBlue-400" />;
 
   return (
-    <div className="main-container font-pacifico text-white bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400">
-      <div className="items-container">
-        <div className="header-container text-center ">
-          <h1 data-testid="recipee-title">{data[0].strDrink}</h1>
-          <h4 data-testid="recipe-category">{data[0].strCategory}</h4>
-        </div>
+    <div className="text-center w-screen flex-col lg:flex-row flex justify-around items-baseline font-montserrat lg:h-screen text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-blue-400 to-blue-500">
+      <div className="flex lg:h-screen/80 w-full lg:w-1/2 items-center flex-col">
+        <h1
+          className="header-container font-pacifico"
+          data-testid="recipe-title"
+        >
+          {data[0].strDrink}
+        </h1>
         <img
-          className="rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-lightBlue-600"
+          className="rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-blue-600"
           src={ data[0].strDrinkThumb }
           alt="recipe-img"
           data-testid="recipe-photo"
         />
-        <div className="flex flex-row justify-around items-baseline">
-          <CopyButton location={ `/bebidas/${id}` } />
+        <div className="flex items-center">
+          <CopyButton location={ `/comidas/${id}` } />
           <FavoriteButtonDrink id={ id } fetchAgain="true" />
         </div>
 
+        <h4 data-testid="recipe-category">{`Categoria: ${data[0].strCategory}`}</h4>
+      </div>
+      <div className="justify-between flex flex-col w-full flex-none lg:w-1/2 lg:h-screen/80 overflow-auto">
+        <h1 className="header-container text-3xl font-pacifico"> Checklist dos ingredientes !</h1>
         <DrinkIngredientsList
           progressRecipes={ progressRecipes }
           id={ id }
           setCheck={ setCheck }
           getCheck={ getCheck }
         />
-
-        <div className="h-auto flex mb-10 bg-white text-center rounded-xl shadow-xl flex-col">
+        <div className="flex flex-col mb-20 mx-4 bg-white rounded-xl shadow-xl">
           <button
-            className="p-2 text-lightBlue-500 focus:outline-none text-3xl"
+            className="bg-white p-2 rounded-lg text-blue-500 focus:outline-none text-2xl"
             type="button"
             onClick={ setInstructions }
           >
             Instruções
           </button>
           {instructionsShow && (
-            <p className=" p-2 text-lightBlue-500" data-testid="instructions">
+            <p
+              className="bg-white rounded-lg p-2 text-blue-500"
+              data-testid="instructions"
+            >
               {data[0].strInstructions}
             </p>
           )}
         </div>
-        <DoneRecipeButtonDrink
-          history={ history }
-          id={ id }
-          data={ data }
-          progressRecipes={ progressRecipes }
-        />
       </div>
+      <DoneRecipeButtonDrink
+        history={ history }
+        id={ id }
+        data={ data }
+        progressRecipes={ progressRecipes }
+      />
     </div>
   );
 }

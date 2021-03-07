@@ -40,10 +40,10 @@ function RecipeDrinkCard() {
         if (index <= maxListSize) {
           return (
             <div
-              className="w-11/12 sm:w-1/3 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 m-4 border-t-4 rounded-xl border-lightBlue-300 shadow-xl"
+              className="w-11/12 sm:w-1/3 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 m-4 border-t-4 rounded-xl border-blue-400 shadow-xl"
               data-testid={ `${index}-recipe-card` }
             >
-              <Link className="link text-lightBlue-300 hover:text-lightBlue-400" to={ `/bebidas/${idDrink}` } key={ idDrink }>
+              <Link className="link text-blue-500 hover:text-blue-600" to={ `/bebidas/${idDrink}` } key={ idDrink }>
                 <img
                   className="sm:w-full w-auto rounded-t-lg object-fill bg-white"
                   data-testid={ `${index}-card-img` }

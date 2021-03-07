@@ -20,7 +20,7 @@ function Drinks({ location }) {
   return (
     <div className="h-screen mx-auto max-h-screen w-screen min-h-screen bg-white">
       <div className="h-screen flex flex-column items-center mx-auto justify-center w-11/12">
-        <div className="border-b-4 border-t-4 m-4 w-10/12 border-white bg-gradient-to-tr from-lightBlue-300 to-lightBlue-400 shadow-md rounded-xl p-4 mx-auto">
+        <div className="border-b-4 border-t-4 m-4 w-10/12 border-white bg-gradient-to-tr from-blue-400 to-blue-500 shadow-md rounded-xl p-4 mx-auto">
           <Header title="Bebidas" />
           {searchBarView && <SearchBar location={ location.pathname } />}
         </div>

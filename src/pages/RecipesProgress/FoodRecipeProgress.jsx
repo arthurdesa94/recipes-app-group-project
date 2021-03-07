@@ -4,6 +4,7 @@ import FavoriteButtonFood from '../../components/FavoriteButtons/FavoriteButtonF
 import FoodIngredientsList from '../../components/IngredientLists/FoodIngredientsList';
 import * as API from '../../services/foodApi';
 import CopyButton from '../../components/CopyButton';
+import Loading from '../../components/Loading';
 import DoneRecipeButtonFood from '../../components/DoneRecipeButtons/DoneRecipeButtonFood';
 
 function FoodRecipeProgress({ match, history }) {
@@ -59,7 +60,7 @@ function FoodRecipeProgress({ match, history }) {
     handleStorage();
   }, [id, progressRecipes]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading bgColor="from-amber-300 to-amber-400" />;
 
   return (
     <div className="text-center w-screen flex-col lg:flex-row flex justify-around items-baseline font-montserrat lg:h-screen text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-amber-400 to-amber-500">
