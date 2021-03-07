@@ -92,7 +92,7 @@ function Login(props) {
           </label>
           <label className="w-11/12 h-1/3" htmlFor="senha">
             <input
-              className="focus:outline-none w-full h-full opacity-80 focus:opacity-100 text-center border-b-2 border-white focus:border-green-300 rounded-lg"
+              className="focus:outline-none w-full h-full opacity-80 focus:opacity-100 text-center  border-b-2 border-white focus:border-green-300 rounded-lg"
               data-testid="password-input"
               placeholder="Insira a senha"
               type="password"

@@ -43,15 +43,6 @@ input:checked + label {
   width: 100%;
 }
 
-.toggle-enter, .toggle-appear {
-  max-height: 48px;
-}
-
-.toggle-enter-active, .toggle-appear-active {
-  max-height: auto;
-  transition: all 300ms;
-}
-
 .example-enter {
   transform: translateX(100%)
 }

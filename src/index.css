@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 @layer components {
   .blur {
@@ -13,6 +14,16 @@
   .font-pacifico {
     font-family: 'Pacifico', cursive;
   }
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif
+  }
+  .display-h::-webkit-scrollbar {
+    display: none;
+  }
+  .display-h {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
   .link {
     @apply text-white hover:text-white hover:no-underline;
   }
@@ -31,6 +42,24 @@
   .min-width {
     min-width: 46%
   }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF5733;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF2D00;
+}
 }
 
 @layer base {

@@ -18,15 +18,15 @@ function Foods({ location }) {
   }, [dispatch, setterIngredient]);
 
   return (
-    <div className="h-screen overflow-y-scroll w-screen min-w-screen min-h-screen bg-gradient-to-tr from-amber-300 to-amber-400">
-      <div className="h-auto flex flex-column items-center mx-auto justify-center w-11/12">
-        <div className="blur bg-clip-ppading border-b-4 border-t-4 m-4 w-10/12 border-white shadow-xl rounded-lg p-4 mx-auto">
+    <div className="h-screen mx-auto max-h-screen w-screen min-h-screen bg-white">
+      <div className="h-screen flex flex-column items-center mx-auto justify-center w-11/12">
+        <div className="border-b-4 border-t-4 m-4 w-10/12 border-white bg-gradient-to-tr from-amber-300 to-amber-400 shadow-md rounded-xl p-4 mx-auto">
           <Header title="Comidas" />
           {searchBarView && <SearchBar location={ location.pathname } />}
         </div>
         <CategoryBar type="foods" />
         <RecipeFoodCard />
-        <MenuInferior />
+        <MenuInferior type="foods" />
       </div>
     </div>
   );

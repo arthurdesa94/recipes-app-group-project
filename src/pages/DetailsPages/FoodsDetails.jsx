@@ -63,7 +63,7 @@ function FoodsDetails({ match, location }) {
 
   if (loading) return <h1>Loading...</h1>;
   return (
-    <div className="text-center w-screen font-pacifico text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-amber-400 to-amber-500">
+    <div className="text-center w-screen flex justify-center font-montserrat lg:h-screen text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-amber-400 to-amber-500">
       {details.map(
         ({
           strMealThumb,
@@ -73,92 +73,102 @@ function FoodsDetails({ match, location }) {
           strYoutube,
         }) => (
           <div
-            className="flex overscroll-y-auto flex-col items-center justify-center w-11/12 mx-auto h-10/12"
+            className="flex overscroll-y-auto flex-col lg:flex-row items-center justify-center w-10/12 mx-auto h-10/12"
             key={ strMeal }
           >
-            <h1 className="header-container" data-testid="recipe-title">
-              {strMeal}
-            </h1>
-            <img
-              className=" rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-amber-600"
-              data-testid="recipe-photo"
-              src={ strMealThumb }
-              alt="recipeImg"
-            />
-            <div className="flex flex-row m-2 justify-around items-baseline">
-              <CopyButton location={ location.pathname } />
-              <FavoriteButtonFood id={ id } />
-            </div>
-            <p data-testid="recipe-category">{`Categoria: ${strCategory}`}</p>
-            <div className="bg-white rounded-lg mb-2 flex flex-col justify-center items-center">
-              <button
-                type="button"
-                onClick={ setIngredients }
-                className="bg-white text-2xl text-center focus:outline-none rounded-lg p-2 text-amber-500"
+            <div className="flex w-full lg:w-1/2 items-center flex-col">
+              <h1
+                className="header-container font-pacifico"
+                data-testid="recipe-title"
               >
-                Ingredientes
-              </button>
-              {ingredientsShow && (
-                <ul className="bg-white rounded-lg p-2">
-                  {retrieveIngredients().map((ingredients, index) => (
-                    <li
-                      className="border-t-2 border-b-2 border-amber-300 m-2 p-2 rounded-lg text-amber-500"
-                      data-testid={ `${index}-ingredient-name-and-measure` }
-                      key={ ingredients }
-                    >
-                      {ingredients}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div className="flex flex-col bg-white rounded-xl shadow-xl">
-              <button
-                className="bg-white p-2 rounded-lg text-amber-500 focus:outline-none text-2xl"
-                type="button"
-                onClick={ setInstructions }
+                {strMeal}
+              </h1>
+              <img
+                className="rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-amber-600"
+                data-testid="recipe-photo"
+                src={ strMealThumb }
+                alt="recipeImg"
+              />
+              <div className="flex flex-row m-2 justify-around items-baseline">
+                <CopyButton location={ location.pathname } />
+                <FavoriteButtonFood id={ id } />
+              </div>
+              <p
+                className="font-montserrat font-3xl"
+                data-testid="recipe-category"
               >
-                Instruções
-              </button>
-              {instructionsShow && (
-                <p
-                  className="bg-white rounded-lg p-2 text-amber-500"
-                  data-testid="instructions"
+                {`Categoria: ${strCategory}`}
+              </p>
+            </div>
+            <div className="flex flex-col w-full flex-none lg:w-1/2 lg:h-screen/80 overflow-auto">
+              <div className="flex flex-col bg-white rounded-xl shadow-xl mb-2">
+                <button
+                  type="button"
+                  onClick={ setIngredients }
+                  className="bg-white text-2xl text-center focus:outline-none rounded-lg p-2 text-amber-500"
                 >
-                  {strInstructions}
-                </p>
-              )}
-            </div>
-            <iframe
-              className="m-2 p-2 border-t-2 border-b-2 border-white bg-whtie"
-              data-testid="video"
-              title={ strMeal }
-              width="320"
-              height="180"
-              src={ strYoutube }
-              frameBorder="0"
-              allow="accelerometer; autoplay;
+                  Ingredientes
+                </button>
+                {ingredientsShow && (
+                  <ul className="bg-white rounded-lg p-2">
+                    {retrieveIngredients().map((ingredients, index) => (
+                      <li
+                        className="font-montserrat border-t-2 border-b-2 border-amber-300 m-2 p-2 rounded-lg text-amber-500"
+                        data-testid={ `${index}-ingredient-name-and-measure` }
+                        key={ ingredients }
+                      >
+                        {ingredients}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="flex flex-col bg-white rounded-xl shadow-xl">
+                <button
+                  className="bg-white p-2 rounded-lg text-amber-500 focus:outline-none text-2xl"
+                  type="button"
+                  onClick={ setInstructions }
+                >
+                  Instruções
+                </button>
+                {instructionsShow && (
+                  <p
+                    className="bg-white rounded-lg p-2 text-amber-500"
+                    data-testid="instructions"
+                  >
+                    {strInstructions}
+                  </p>
+                )}
+              </div>
+              <iframe
+                className="m-2 p-2 border-t-2 border-b-2 w-auto h-auto border-white bg-whtie"
+                data-testid="video"
+                title={ strMeal }
+                src={ strYoutube }
+                frameBorder="0"
+                allow="accelerometer; autoplay;
               clipboard-write; encrypted-media;
               gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-            <div className="flex text-amber-600 justify-between items-center mb-4 text-3xl flex-row w-screen overflow-auto">
-              {recommendation.map((element, index) => (
-                <div
-                  className="min-width bg-white p-2 m-2 rounded-lg flex flex-col"
-                  data-testid={ `${index}-recomendation-card` }
-                  key={ element.idDrink }
-                >
-                  <img
-                    className="rounded-lg"
-                    src={ element.strDrinkThumb }
-                    alt="recipeImg"
-                  />
-                  <p data-testid={ `${index}-recomendation-title` }>
-                    {element.strDrink}
-                  </p>
-                </div>
-              ))}
+                allowFullScreen
+              />
+              <div className="flex flex-none text-amber-600 w-full justify-between items-center mb-4 text-3xl flex-row lg:w-full overflow-x-auto h-auto">
+                {recommendation.map((element, index) => (
+                  <div
+                    className="min-width font-pacifico bg-white p-2 m-2 rounded-lg flex flex-col"
+                    data-testid={ `${index}-recomendation-card` }
+                    key={ element.idDrink }
+                  >
+                    <img
+                      className="rounded-lg"
+                      src={ element.strDrinkThumb }
+                      alt="recipeImg"
+                    />
+                    <p data-testid={ `${index}-recomendation-title` }>
+                      {element.strDrink}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
             <StartRecipeButtonFood
               id={ id }

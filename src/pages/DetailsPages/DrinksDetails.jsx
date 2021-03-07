@@ -59,7 +59,7 @@ function DrinksDetails({ match, location }) {
   }, [response]);
   if (loading || !detailsDrink) return <Loading bgColor="from-lightBlue-200 to-lightBlue-400" />;
   return (
-    <div className="text-center w-screen font-pacifico text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-lightBlue-300 to-lightBlue-400">
+    <div className="text-center w-screen flex justify-center font-montserrat lg:h-screen text-white min-w-screen min-h-screen bg-gradient-to-r h-auto from-amber-400 to-amber-500">
       {detailsDrink.map(
         ({
           strAlcoholic,
@@ -69,14 +69,14 @@ function DrinksDetails({ match, location }) {
           strInstructions,
         }) => (
           <div
-            className="flex overscroll-y-auto flex-col items-center justify-center w-11/12 mx-auto h-10/12"
+            className="flex overscroll-y-auto flex-col lg:flex-row items-center justify-center w-10/12 mx-auto h-10/12"
             key={ strDrink }
           >
-            <h1 className="header-container" data-testid="recipe-title">
+            <h1 className="header-container font-pacifico" data-testid="recipe-title">
               {strDrink}
             </h1>
             <img
-              className=" rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-lightBlue-600"
+              className="rounded-lg w-4/5 p-2 bg-white shadow-xl border-t-2 border-b-2 border-amber-600"
               data-testid="recipe-photo"
               src={ strDrinkThumb }
               alt="recipeImg"

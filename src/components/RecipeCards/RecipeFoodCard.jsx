@@ -36,11 +36,11 @@ function RecipeFoodCard() {
       return recipes.map(({ strMeal, idMeal, strMealThumb }, index) => {
         if (index <= maxListSize) {
           return (
-            <div className="w-2/5 bg-white h-auto flex flex-col justify-center items-center transform hover:scale-105 transition-all border-b-4 p-4 m-4 border-t-4 rounded-xl border-amber-500 shadow-2xl">
-              <Link className="link text-amber-500 hover:text-amber-500" to={ `/comidas/${idMeal}` } key={ idMeal }>
+            <div className="w-11/12 sm:w-1/3 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 m-4 border-t-4 rounded-xl border-amber-300 shadow-xl">
+              <Link className="link text-amber-300 hover:text-amber-400" to={ `/comidas/${idMeal}` } key={ idMeal }>
                 <div data-testid={ `${index}-recipe-card` }>
                   <img
-                    className="w-11/12 mx-auto shadow-xl bg-white rounded-xl "
+                    className="sm:w-full w-auto rounded-t-lg object-fill bg-white"
                     data-testid={ `${index}-card-img` }
                     src={ strMealThumb }
                     alt="recipeimage"
@@ -61,7 +61,7 @@ function RecipeFoodCard() {
     }
   };
   if (loading) return <Loading />
-  return <div className="w-screen h-auto flex-wrap justify-center items-center flex flex-row">{returnRecipes()}</div>;
+  return <div className="w-screen h-screen rounded-xl my-2 p-4 flex-wrap overflow-y-scroll justify-center items-center flex flex-row">{returnRecipes()}</div>;
 }
 
 export default RecipeFoodCard;

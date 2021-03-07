@@ -66,9 +66,27 @@ function FavoriteButtonDrink({ id, fetchAgain, testId, setTrue }) {
   if (!detailsDrink[0]) return <h1>Loading...</h1>;
 
   return (
-    <button className="focus:outline-none" onClick={ favoriteFunc } type="button">
-      {favorite ? <FontAwesomeIcon className="transform hover:scale-105" size="2x" icon={ faHeart } /> : <FontAwesomeIcon className="transform hover:scale-105" size="2x" icon={ faRegularHeart } /> }
-    </button>
+    <div>
+      <button
+        className="focus:outline-none"
+        onClick={ favoriteFunc }
+        type="button"
+      >
+        {favorite ? (
+          <FontAwesomeIcon
+            className="transform hover:scale-105"
+            size="2x"
+            icon={ faHeart }
+          />
+        ) : (
+          <FontAwesomeIcon
+            className="transform hover:scale-105"
+            size="2x"
+            icon={ faRegularHeart }
+          />
+        )}
+      </button>
+    </div>
   );
 }
 

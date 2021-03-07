@@ -40,12 +40,12 @@ function RecipeDrinkCard() {
         if (index <= maxListSize) {
           return (
             <div
-              className="w-11/12 sm:w-1/3 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 p-2 m-4 border-t-4 rounded-xl border-lightBlue-600 shadow-2xl"
+              className="w-11/12 sm:w-1/3 bg-white h-auto flex flex-column justify-center items-center transform hover:scale-105 transition-all border-b-4 m-4 border-t-4 rounded-xl border-lightBlue-300 shadow-xl"
               data-testid={ `${index}-recipe-card` }
             >
-              <Link className="link text-lightBlue-600 hover:text-lightBlue-600" to={ `/bebidas/${idDrink}` } key={ idDrink }>
+              <Link className="link text-lightBlue-300 hover:text-lightBlue-400" to={ `/bebidas/${idDrink}` } key={ idDrink }>
                 <img
-                  className="transform transition-all hover:rotate- w-11/12 sm:w-full object-cover mx-auto shadow-xl bg-white rounded-xl"
+                  className="sm:w-full w-auto rounded-t-lg object-fill bg-white"
                   data-testid={ `${index}-card-img` }
                   src={ strDrinkThumb }
                   alt="recipeimage"
@@ -66,7 +66,7 @@ function RecipeDrinkCard() {
   };
 
   if (loading) return <Loading />;
-  return <div className="w-screen h-screen rounded-2xl my-4 p-4 flex-wrap overflow-y-scroll justify-center items-center flex flex-row">{returnRecipes()}</div>;
+  return <div className="w-screen h-screen rounded-xl my-2 p-4 flex-wrap overflow-y-scroll justify-center items-center flex flex-row">{returnRecipes()}</div>;
 }
 
 export default RecipeDrinkCard;

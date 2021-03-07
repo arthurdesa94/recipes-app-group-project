@@ -62,26 +62,40 @@ function CategoryBar({ type }) {
 
   // prettier-ignore
   return (
-    <div className="flex justify-center flex-wrap items-center w-11/12">
-      <button
-        className="transform hover:scale-110 transition-all font-pacifico border-b-2 ml-4 rounded-full focus:outline-none text-xl text-white"
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ handleAll }
+    <div className="display-h h-20 justify-between flex items-center w-4/5 mx-auto overflow-x-auto overflow-y-hidden">
+      <div
+        className={ `transform hover:scale-110 break-normal 
+        transition-all h-auto w-auto font-monteserrat rounded-lg 
+        border-b-2 ml-4 ${type === 'drinks' ? 'text-lightBlue-300' : 'text-amber-300'}` }
       >
-        All
-      </button>
+        <button
+          className="focus:outline-none w-20 h-4 font-bold"
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ handleAll }
+        >
+          All
+        </button>
+      </div>
+
       {response.map(
         (element, index) => index < five && (
-          <button
-            className="transform hover:scale-110 transition-all font-pacifico border-b-2 ml-4 rounded-full focus:outline-none text-xl text-white"
-            key={ element.strCategory }
-            type="button"
-            data-testid={ `${element.strCategory}-category-filter` }
-            onClick={ handleClick }
+          <div
+            className={ `transform hover:scale-110 break-normal 
+          transition-all h-auto w-auto font-monteserrat rounded-lg 
+          border-b-2 ml-4 ${type === 'drinks' ? 'text-lightBlue-300' : 'text-amber-300'}` }
           >
-            {element.strCategory}
-          </button>
+            <button
+              className="focus:outline-none w-36 h-4 font-bold"
+              key={ element.strCategory }
+              type="button"
+              data-testid={ `${element.strCategory}-category-filter` }
+              onClick={ handleClick }
+            >
+              {element.strCategory}
+            </button>
+          </div>
+
         ),
       )}
     </div>
